@@ -219,8 +219,8 @@
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Runtime\Overrides\DepthOfField.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Runtime\Passes\DeferredPass.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Runtime\Overrides\FilmGrain.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Runtime\Debug\DebugRenderSetup.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Runtime\ScriptableRendererData.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Runtime\Debug\DebugRenderSetup.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Runtime\2D\UTess2D\Tessellator.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Runtime\PostProcessUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.12\Runtime\RenderTargetBufferSystem.cs" />

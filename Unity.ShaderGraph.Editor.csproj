@@ -293,8 +293,8 @@
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Graphs\TextureSamplerState.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Collections\IncludeCollection.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Graphs\GraphValidation.cs" />
-    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Math\Advanced\ExponentialNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Controls\ChannelEnumControl.cs" />
+    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Math\Advanced\ExponentialNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Input\Geometry\ViewVectorNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Input\Texture\SamplerStateNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Procedural\Noise\VoronoiNode.cs" />
@@ -425,8 +425,8 @@
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Attributes\SubTargetFilterAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Targets\BuiltIn\Editor\ShaderGraph\BuiltInFields.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Legacy\UnlitMasterNode1.cs" />
-    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Targets\BuiltIn\Editor\ShaderGraph\BuiltInStructs.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Graphs\CubemapInputMaterialSlot.cs" />
+    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Targets\BuiltIn\Editor\ShaderGraph\BuiltInStructs.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Legacy\SerializableGuid.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Collections\DependencyCollection.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Util\ValueUtilities.cs" />
@@ -710,8 +710,8 @@
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Utility\Logic\IsInfiniteNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Procedural\Shape\EllipseNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Inspector\PropertyDrawers\SampleTexture3DNodePropertyDrawer.cs" />
-    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Controllers\SGController.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Channel\SwizzleNode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Drawing\Controllers\SGController.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Nodes\Input\Texture\TextureStackNode.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Data\Implementation\Edge.cs" />
     <Compile Include="Library\PackageCache\com.unity.shadergraph@14.0.12\Editor\Generation\Processors\MatrixNames.cs" />
@@ -1211,10 +1211,6 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="unityplastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.10.1\Lib\Editor\unityplastic.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.10.1\Lib\Editor\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -1229,6 +1225,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.IonicZip">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@2.10.1\Lib\Editor\unityplastic.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
