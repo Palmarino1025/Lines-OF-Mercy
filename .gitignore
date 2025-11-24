@@ -1,0 +1,49 @@
+# =============== #
+# Unity generated #
+# =============== #
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+MemoryCaptures/
+/[Rr]ecordings/
+
+# Visual Studio
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+
+# Crash and debug files
+sysinfo.txt
+
+# Other
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.bak
+*.old
+*.orig
+*.idb
+
+# Unity Cloud
+/.idea/
+/.gradle/
+*.apk
+*.aab
+*.keystore
+
+# OS junk
+.DS_Store
+Thumbs.db
