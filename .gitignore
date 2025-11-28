@@ -1,18 +1,21 @@
 # =============== #
 # Unity generated #
 # =============== #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Uu]ser[Ss]ettings/
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+**/[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
 MemoryCaptures/
-/[Rr]ecordings/
+[Rr]ecordings/
 
-# Visual Studio
+# Visual Studio / IDE
 .vs/
+*/.vs/
+*.vsconfig
 *.csproj
 *.unityproj
 *.sln
@@ -37,9 +40,9 @@ sysinfo.txt
 *.orig
 *.idb
 
-# Unity Cloud
+# Unity Cloud / Rider / Gradle
 /.idea/
-/.gradle/
+.gradle/
 *.apk
 *.aab
 *.keystore
