@@ -4,7 +4,12 @@ using UnityEngine;
 public class PCCameraController : MonoBehaviour
 {
     // How fast the camera moves.
-    public float moveSpeed = 10f;
+    public float moveSpeed = 15f;
+    // Faster movement speed while Left Shift held down
+    public float fastMoveSpeed = 25f;
+    // Key will activate the faster speed.
+    public KeyCode fastMoveKey = KeyCode.LeftShift;
+
 
     private void Update()
     {
@@ -50,7 +55,16 @@ public class PCCameraController : MonoBehaviour
             moveDirection = moveDirection.normalized;
         }
 
+        // Choose which speed to use this frame.
+        float moveSpeedThisFrame = moveSpeed;
+
+        // If the fast move key is held, use the faster speed.
+        if (Input.GetKey(fastMoveKey))
+        {
+            moveSpeedThisFrame = fastMoveSpeed;
+        }
+
         // Move the camera.
-        transform.position += moveDirection * moveSpeed * Time.deltaTime;
+        transform.position += moveDirection * moveSpeedThisFrame * Time.deltaTime;
     }
 }
