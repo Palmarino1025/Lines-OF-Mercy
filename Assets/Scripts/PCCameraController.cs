@@ -17,7 +17,7 @@ public class PCCameraController : MonoBehaviour
     public bool holdRightMouseToRotate = true;
 
     // Zoom settings (moving camera forward and backward).
-    public float zoomSpeed = 20f;
+    //public float zoomSpeed = 20f;
 
     // Minimum and maximum height for the camera.
     public float minCameraHeight = 2f;
@@ -27,12 +27,34 @@ public class PCCameraController : MonoBehaviour
     private float currentYaw;   // Left / right rotation (Y axis).
     private float currentPitch; // Up / down rotation (X axis).
 
+    // Camera component on this GameObject
+    private Camera cameraComponent;
+
+    // Default field of view (saved at Start)
+    private float defaultFieldOfView;
+
+    // Zoomed-in field of view (smaller value = more zoom).
+    public float zoomedFieldOfView = 20f;
+
+
     private void Start()
     {
         // Initialize rotation values from the current camera rotation.
         Vector3 startingRotation = transform.eulerAngles;
         currentYaw = startingRotation.y;
         currentPitch = startingRotation.x;
+
+        // Get the Camera component and store its starting Field Of View
+        cameraComponent = GetComponent<Camera>();
+
+        if (cameraComponent != null)
+        {
+            defaultFieldOfView = cameraComponent.fieldOfView;
+        }
+        else
+        {
+            Debug.LogWarning("PCCameraController: No Camera component found on this GameObject.");
+        }
     }
 
     private void Update()
@@ -122,25 +144,30 @@ public class PCCameraController : MonoBehaviour
     }
 
     // Handle zoom using the mouse scroll wheel
+    // Handle zoom like a phone camera by changing Field Of View
+    // instead of moving the camera position.
     private void HandleZoom()
     {
-        // Positive valur when scrolling up, negative when scrolling down
-        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-        // If there is very little scroll input, do nothing
-        if(Mathf.Abs(scrollInput)<0.0001f)
+        // If we do not have a Camera component, there is nothing to zoom.
+        if (cameraComponent == null)
         {
-            return ;
+            return;
         }
 
-        // move the camera in its forward direction
-        Vector3 zoomDirection = transform.forward;
+        // Positive when scrolling up, negative when scrolling down.
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
-        Vector3 newPosition =
-            transform.position +
-            zoomDirection * scrollInput * zoomSpeed;
-
-        transform.position = newPosition;
-    
+        // If we scroll up, zoom in (go to zoomed FOV).
+        if (scrollInput > 0.01f)
+        {
+            cameraComponent.fieldOfView = zoomedFieldOfView;
+        }
+        // If we scroll down, zoom out (return to default FOV).
+        else if (scrollInput < -0.01f)
+        {
+            cameraComponent.fieldOfView = defaultFieldOfView;
+        }
+        // If scrollInput is close to zero, do nothing and keep current FOV.
     }
 
     // Keep the camera's height within a certain range
