@@ -16,6 +16,13 @@ public class PCCameraController : MonoBehaviour
     // If true, camera rotates only while right mouse button is held.
     public bool holdRightMouseToRotate = true;
 
+    // Zoom settings (moving camera forward and backward).
+    public float zoomSpeed = 20f;
+
+    // Minimum and maximum height for the camera.
+    public float minCameraHeight = 2f;
+    public float maxCameraHeight = 50f;
+
     // Internal rotation values.
     private float currentYaw;   // Left / right rotation (Y axis).
     private float currentPitch; // Up / down rotation (X axis).
@@ -32,6 +39,8 @@ public class PCCameraController : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
+        HandleZoom();
+        ClampHeight();
     }
 
     // Handle WASD movement.
@@ -112,4 +121,40 @@ public class PCCameraController : MonoBehaviour
         transform.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
     }
 
+    // Handle zoom using the mouse scroll wheel
+    private void HandleZoom()
+    {
+        // Positive valur when scrolling up, negative when scrolling down
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        // If there is very little scroll input, do nothing
+        if(Mathf.Abs(scrollInput)<0.0001f)
+        {
+            return ;
+        }
+
+        // move the camera in its forward direction
+        Vector3 zoomDirection = transform.forward;
+
+        Vector3 newPosition =
+            transform.position +
+            zoomDirection * scrollInput * zoomSpeed;
+
+        transform.position = newPosition;
+    
+    }
+
+    // Keep the camera's height within a certain range
+    private void ClampHeight()
+    {
+        Vector3 clampedPosition = transform.position;
+
+        // Clamp just the Y (height) value
+        clampedPosition.y = Mathf.Clamp(
+            clampedPosition.y,
+            minCameraHeight,
+            maxCameraHeight
+        );
+
+        transform.position = clampedPosition;
+    }
 }
