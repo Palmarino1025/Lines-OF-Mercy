@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\palma\\Capstone\\Lines of Mercy\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{745B76AE-051A-C47F-4612-D30B9306B269}|Assembly-CSharp.csproj|c:\\users\\palma\\capstone\\lines of mercy\\assets\\polygon city pack\\read_me.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{745B76AE-051A-C47F-4612-D30B9306B269}|Assembly-CSharp.csproj|solutionrelative:assets\\polygon city pack\\read_me.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{131369f2-062d-44a2-8671-91ff31efb4f4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Read_me.txt",
+              "DocumentMoniker": "C:\\Users\\palma\\Capstone\\Lines of Mercy\\Assets\\POLYGON city pack\\Read_me.txt",
+              "RelativeDocumentMoniker": "Assets\\POLYGON city pack\\Read_me.txt",
+              "ToolTip": "C:\\Users\\palma\\Capstone\\Lines of Mercy\\Assets\\POLYGON city pack\\Read_me.txt",
+              "RelativeToolTip": "Assets\\POLYGON city pack\\Read_me.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-12-01T19:12:23.461Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

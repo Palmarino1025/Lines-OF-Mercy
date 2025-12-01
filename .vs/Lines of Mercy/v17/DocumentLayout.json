@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\palma\\Capstone\\Lines of Mercy\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0E19D51D-8C9A-FC7C-0588-EFEF6C845954}|Unity.RenderPipelines.Universal.Shaders.csproj|c:\\users\\palma\\capstone\\lines of mercy\\library\\packagecache\\com.unity.render-pipelines.universal@14.0.12\\shaders\\2d\\sprite-lit-default.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{0E19D51D-8C9A-FC7C-0588-EFEF6C845954}|Unity.RenderPipelines.Universal.Shaders.csproj|solutionrelative:library\\packagecache\\com.unity.render-pipelines.universal@14.0.12\\shaders\\2d\\sprite-lit-default.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{745B76AE-051A-C47F-4612-D30B9306B269}|Assembly-CSharp.csproj|c:\\users\\palma\\capstone\\lines of mercy\\assets\\polygon city pack\\read_me.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{745B76AE-051A-C47F-4612-D30B9306B269}|Assembly-CSharp.csproj|solutionrelative:assets\\polygon city pack\\read_me.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{131369f2-062d-44a2-8671-91ff31efb4f4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Sprite-Lit-Default.shader",
+              "DocumentMoniker": "C:\\Users\\palma\\Capstone\\Lines of Mercy\\Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.12\\Shaders\\2D\\Sprite-Lit-Default.shader",
+              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.12\\Shaders\\2D\\Sprite-Lit-Default.shader",
+              "ToolTip": "C:\\Users\\palma\\Capstone\\Lines of Mercy\\Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.12\\Shaders\\2D\\Sprite-Lit-Default.shader",
+              "RelativeToolTip": "Library\\PackageCache\\com.unity.render-pipelines.universal@14.0.12\\Shaders\\2D\\Sprite-Lit-Default.shader",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2025-12-01T19:27:15.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Read_me.txt",
+              "DocumentMoniker": "C:\\Users\\palma\\Capstone\\Lines of Mercy\\Assets\\POLYGON city pack\\Read_me.txt",
+              "RelativeDocumentMoniker": "Assets\\POLYGON city pack\\Read_me.txt",
+              "ToolTip": "C:\\Users\\palma\\Capstone\\Lines of Mercy\\Assets\\POLYGON city pack\\Read_me.txt",
+              "RelativeToolTip": "Assets\\POLYGON city pack\\Read_me.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-12-01T19:12:23.461Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
