@@ -5,12 +5,12 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float moveSpeed = 5f;        // Movement speed
-    public float jumpForce = 7f;        // Jump Force
-    public LayerMask groundLayer;
+    public float jumpForce = 3f;        // Jump Force
+    public float jumpCooldown = 1.5f;   // One and a half second between jumps
 
     private Rigidbody rb;               // Reference to Rigidbody
     private Vector3 movement;
-    private bool isGrounded = false;
+    private float jumpTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +27,12 @@ public class Movement : MonoBehaviour
 
         movement = new Vector3(moveX, 0f, moveZ).normalized;
 
-        CheckGround();
+        // Countdown for jump cooldown
+        if (jumpTimer > 0f)
+            jumpTimer -= Time.deltaTime;
 
         // Jump input
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpTimer <= 0f)
         {
             Jump();
         }
@@ -44,11 +46,6 @@ public class Movement : MonoBehaviour
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    }
-
-    void CheckGround()
-    {
-        // Raycast straight down from the player's position
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
+        jumpTimer = jumpCooldown;    // reset cooldown
     }
 }
