@@ -46,6 +46,6 @@ public class Movement : MonoBehaviour
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        jumpTimer = jumpCooldown;    // reset cooldown
+        jumpTimer = jumpCooldown;    // Reset cooldown
     }
 }
