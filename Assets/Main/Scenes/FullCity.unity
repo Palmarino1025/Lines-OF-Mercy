@@ -466,6 +466,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 833372888}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &191424037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 191424038}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &191424038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191424037}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 47.67286, y: 37.804047, z: 151.61728}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1116283906}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &236123313
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,6 +975,10 @@ MonoBehaviour:
   holdRightMouseToRotate: 1
   minCameraHeight: 2
   maxCameraHeight: 50
+  currentYaw: 0
+  currentPitch: 0
+  cameraComponent: {fileID: 0}
+  defaultFieldOfView: 0
   zoomedFieldOfView: 20
 --- !u!1 &410087039
 GameObject:
@@ -1290,7 +1326,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 74.9, y: -88.3}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &521110119
 MonoBehaviour:
@@ -2383,7 +2419,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1699169649}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 191424038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3591,7 +3627,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -830}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1699169650
 MonoBehaviour:
@@ -4512,5 +4548,5 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1793150253}
   - {fileID: 833372888}
-  - {fileID: 1116283906}
   - {fileID: 497878534}
+  - {fileID: 191424038}
