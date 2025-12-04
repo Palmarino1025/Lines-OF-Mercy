@@ -8,8 +8,14 @@ public class NpcInteraction : MonoBehaviour
     // reference to the "Press E" world-space canvas
     public GameObject interactionPromptObject;
 
-    // This will be true only while the player is inside the trigger
+    // UI panel that holds your dialogue UI (DialogPanel)
+    public GameObject dialoguePanelObject;
+
+    // True only while the player is inside the interaction trigger
     private bool isPlayerInsideInteractionRange = false;
+
+    // True while this NPC's dialogue is currently open
+    private bool isDialogueActive = false;
 
     private void Start()
     {
@@ -18,12 +24,33 @@ public class NpcInteraction : MonoBehaviour
         {
             interactionPromptObject.SetActive(false);
         }
+
+        // Make sure the dialogue panel is hidden at the start
+        if (dialoguePanelObject != null)
+        {
+            dialoguePanelObject.SetActive(false);
+        }
     }
 
-    // This method is called when something enters the trigger collider
+    private void Update()
+    {
+        // Only listen for E if:
+        // 1) player is inside range
+        // 2) dialogue is not already active
+        if (isPlayerInsideInteractionRange && !isDialogueActive)
+        {
+            // GetKeyDown is true only on the frame the key is pressed
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("NpcInteraction: E key pressed. Starting dialogue...");
+                StartDialogueWithNpc();
+            }
+        }
+    }
+
+    // Called when something enters our trigger collider
     private void OnTriggerEnter(Collider otherCollider)
     {
-        // Check if whatever entered has the same tag as player
         if (otherCollider.CompareTag(playerTagName))
         {
             isPlayerInsideInteractionRange = true;
@@ -34,10 +61,9 @@ public class NpcInteraction : MonoBehaviour
         }
     }
 
-    // This method is called when something exits the trigger collider
+    // Called when something exits our trigger collider
     private void OnTriggerExit(Collider otherCollider)
     {
-        // Check if whatever left has the same tag as our player
         if (otherCollider.CompareTag(playerTagName))
         {
             isPlayerInsideInteractionRange = false;
@@ -47,13 +73,42 @@ public class NpcInteraction : MonoBehaviour
             ShowInteractionPrompt(false);
         }
     }
-    // controls the UI prompt visibility
+
+    // Show or hide the "Press E" world-space prompt
     private void ShowInteractionPrompt(bool shouldShowPrompt)
     {
         if (interactionPromptObject != null)
         {
             interactionPromptObject.SetActive(shouldShowPrompt);
+            Debug.Log("NpcInteraction: Prompt set to " + shouldShowPrompt);
+        }
+        else
+        {
+            Debug.LogWarning("NpcInteraction: interactionPromptObject is NOT assigned!");
+        }
+    }
+
+    // starts the dialogue with this NPC
+    private void StartDialogueWithNpc()
+    {
+        // Hide the "Press E" prompt while we are talking
+        ShowInteractionPrompt(false);
+
+        // Turn on the dialogue UI panel
+        if (dialoguePanelObject != null)
+        {
+            dialoguePanelObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("NpcInteraction: dialoguePanelObject is NOT assigned!");
         }
 
+        // Mark dialogue as active so we do not reopen it again right away
+        isDialogueActive = true;
+
+        // TODO later:
+        // - Call Dialogue Manager / Yarn Spinner node
+        // - Freeze player movement
     }
 }
