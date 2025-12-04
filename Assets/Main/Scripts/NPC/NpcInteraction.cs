@@ -34,21 +34,24 @@ public class NpcInteraction : MonoBehaviour
 
     private void Update()
     {
-        // Only listen for E if:
-        // 1) player is inside range
-        // 2) dialogue is not already active
+        // Only listen for E if player is close and dialogue is not already open
         if (isPlayerInsideInteractionRange && !isDialogueActive)
         {
-            // GetKeyDown is true only on the frame the key is pressed
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("NpcInteraction: E key pressed. Starting dialogue...");
                 StartDialogueWithNpc();
             }
         }
+
+        // allow closing dialogue with Escape
+        if (isDialogueActive && Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("NpcInteraction: Escape pressed. Closing dialogue...");
+            CloseDialogueWithNpc();
+        }
     }
 
-    // Called when something enters our trigger collider
     private void OnTriggerEnter(Collider otherCollider)
     {
         if (otherCollider.CompareTag(playerTagName))
@@ -57,11 +60,14 @@ public class NpcInteraction : MonoBehaviour
 
             Debug.Log("NpcInteraction: Player entered interaction range.");
 
-            ShowInteractionPrompt(true);
+            // Only show the prompt if dialogue is not already active
+            if (!isDialogueActive)
+            {
+                ShowInteractionPrompt(true);
+            }
         }
     }
 
-    // Called when something exits our trigger collider
     private void OnTriggerExit(Collider otherCollider)
     {
         if (otherCollider.CompareTag(playerTagName))
@@ -70,25 +76,21 @@ public class NpcInteraction : MonoBehaviour
 
             Debug.Log("NpcInteraction: Player left interaction range.");
 
+            // Hide the E prompt when we are no longer near the NPC
             ShowInteractionPrompt(false);
+
+            // Do NOT close the dialogue here – player closes it with Exit button / ESC
         }
     }
 
-    // Show or hide the "Press E" world-space prompt
     private void ShowInteractionPrompt(bool shouldShowPrompt)
     {
         if (interactionPromptObject != null)
         {
             interactionPromptObject.SetActive(shouldShowPrompt);
-            Debug.Log("NpcInteraction: Prompt set to " + shouldShowPrompt);
-        }
-        else
-        {
-            Debug.LogWarning("NpcInteraction: interactionPromptObject is NOT assigned!");
         }
     }
 
-    // starts the dialogue with this NPC
     private void StartDialogueWithNpc()
     {
         // Hide the "Press E" prompt while we are talking
@@ -110,5 +112,24 @@ public class NpcInteraction : MonoBehaviour
         // TODO later:
         // - Call Dialogue Manager / Yarn Spinner node
         // - Freeze player movement
+    }
+
+    // the UI button can call this
+    public void CloseDialogueWithNpc()
+    {
+        // Turn off the dialogue UI panel
+        if (dialoguePanelObject != null && dialoguePanelObject.activeSelf)
+        {
+            dialoguePanelObject.SetActive(false);
+        }
+
+        // Reset dialogue state
+        isDialogueActive = false;
+
+        // If the player is still in range, show the "Press E" prompt again
+        if (isPlayerInsideInteractionRange)
+        {
+            ShowInteractionPrompt(true);
+        }
     }
 }
