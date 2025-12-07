@@ -1,4 +1,5 @@
 using UnityEngine;
+using PixelCrushers.DialogueSystem;  // connect to Dialogue System
 
 public class NpcInteraction : MonoBehaviour
 {
@@ -8,14 +9,14 @@ public class NpcInteraction : MonoBehaviour
     // reference to the "Press E" world-space canvas
     public GameObject interactionPromptObject;
 
-    // UI panel that holds your dialogue UI (DialogPanel)
-    public GameObject dialoguePanelObject;
+    // Name of the conversation in the Dialogue Database
+    public string conversationTitle = "Test Conversation";
 
     // True only while the player is inside the interaction trigger
     private bool isPlayerInsideInteractionRange = false;
 
-    // True while this NPC's dialogue is currently open
-    private bool isDialogueActive = false;
+    // keep a reference to the player who entered the trigger
+    private Transform playerTransform;
 
     private void Start()
     {
@@ -24,31 +25,15 @@ public class NpcInteraction : MonoBehaviour
         {
             interactionPromptObject.SetActive(false);
         }
-
-        // Make sure the dialogue panel is hidden at the start
-        if (dialoguePanelObject != null)
-        {
-            dialoguePanelObject.SetActive(false);
-        }
     }
 
     private void Update()
     {
-        // Only listen for E if player is close and dialogue is not already open
-        if (isPlayerInsideInteractionRange && !isDialogueActive)
+        // Only listen for E if the player is inside interaction range
+        if (isPlayerInsideInteractionRange && Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Debug.Log("NpcInteraction: E key pressed. Starting dialogue...");
-                StartDialogueWithNpc();
-            }
-        }
-
-        // allow closing dialogue with Escape
-        if (isDialogueActive && Input.GetKeyDown(KeyCode.Escape))
-        {
-            Debug.Log("NpcInteraction: Escape pressed. Closing dialogue...");
-            CloseDialogueWithNpc();
+            Debug.Log("NpcInteraction: E pressed. Starting conversation: " + conversationTitle);
+            StartDialogueWithNpc();
         }
     }
 
@@ -57,14 +42,10 @@ public class NpcInteraction : MonoBehaviour
         if (otherCollider.CompareTag(playerTagName))
         {
             isPlayerInsideInteractionRange = true;
+            playerTransform = otherCollider.transform;
 
             Debug.Log("NpcInteraction: Player entered interaction range.");
-
-            // Only show the prompt if dialogue is not already active
-            if (!isDialogueActive)
-            {
-                ShowInteractionPrompt(true);
-            }
+            ShowInteractionPrompt(true);
         }
     }
 
@@ -73,21 +54,18 @@ public class NpcInteraction : MonoBehaviour
         if (otherCollider.CompareTag(playerTagName))
         {
             isPlayerInsideInteractionRange = false;
+            playerTransform = null;
 
             Debug.Log("NpcInteraction: Player left interaction range.");
-
-            // Hide the E prompt when we are no longer near the NPC
             ShowInteractionPrompt(false);
-
-            // Do NOT close the dialogue here – player closes it with Exit button / ESC
         }
     }
 
-    private void ShowInteractionPrompt(bool shouldShowPrompt)
+    private void ShowInteractionPrompt(bool showPrompt)
     {
         if (interactionPromptObject != null)
         {
-            interactionPromptObject.SetActive(shouldShowPrompt);
+            interactionPromptObject.SetActive(showPrompt);
         }
     }
 
@@ -96,40 +74,15 @@ public class NpcInteraction : MonoBehaviour
         // Hide the "Press E" prompt while we are talking
         ShowInteractionPrompt(false);
 
-        // Turn on the dialogue UI panel
-        if (dialoguePanelObject != null)
+        if (playerTransform != null)
         {
-            dialoguePanelObject.SetActive(true);
+            // player = actor, npc = conversant
+            DialogueManager.StartConversation(conversationTitle, playerTransform, transform);
         }
         else
         {
-            Debug.LogWarning("NpcInteraction: dialoguePanelObject is NOT assigned!");
-        }
-
-        // Mark dialogue as active so we do not reopen it again right away
-        isDialogueActive = true;
-
-        // TODO later:
-        // - Call Dialogue Manager / Yarn Spinner node
-        // - Freeze player movement
-    }
-
-    // the UI button can call this
-    public void CloseDialogueWithNpc()
-    {
-        // Turn off the dialogue UI panel
-        if (dialoguePanelObject != null && dialoguePanelObject.activeSelf)
-        {
-            dialoguePanelObject.SetActive(false);
-        }
-
-        // Reset dialogue state
-        isDialogueActive = false;
-
-        // If the player is still in range, show the "Press E" prompt again
-        if (isPlayerInsideInteractionRange)
-        {
-            ShowInteractionPrompt(true);
+            // Fallback if we somehow lost the player reference
+            DialogueManager.StartConversation(conversationTitle);
         }
     }
 }

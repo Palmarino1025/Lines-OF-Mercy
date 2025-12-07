@@ -60,12 +60,12 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Main\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PCCameraController.cs" />
     <Compile Include="Assets\Main\Scripts\UI\SplashLoader.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Main\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Main\Scripts\UI\MicIndicator.cs" />
     <Compile Include="Assets\Main\Scripts\NPC\NpcInteraction.cs" />
-    <Compile Include="Assets\Main\Scripts\Dialogue\MicIndicator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -1058,6 +1058,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{43E4BFE7-492D-0900-04BC-9C81DF210ACD}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
