@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PCCameraMouseLook : MonoBehaviour
+public class PCCameraController : MonoBehaviour
 {
     public float mouseSensitivity = 2f;   // Mouse sensitivity multiplier
     public bool holdRightMouseToRotate = false; // If true, rotate only when RMB held
