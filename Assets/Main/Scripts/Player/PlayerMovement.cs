@@ -1,45 +1,105 @@
 using UnityEngine;
 
+// This makes sure a CharacterController exists on the same GameObject
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 6f;
-    public Transform cameraTransform;  // Assign your main camera here in Inspector
+    [Header("Movement Speeds")]
+    public float walkSpeed = 4f;
+    public float sprintSpeed = 7f;
 
-    private CharacterController controller;
+    [Header("Jump / Gravity")]
+    public float jumpHeight = 1.5f;
+    public float gravityForce = -9.81f; // Negative because gravity pulls down
+
+    [Header("References")]
+    public Transform cameraTransform;  // Drag your Main Camera here in the Inspector
+
+    private CharacterController characterController;
+    private Vector3 playerVelocity;
+    private bool isMovementLocked = false;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
 
         if (cameraTransform == null)
         {
-            Debug.LogError("Please assign the cameraTransform in the inspector.");
+            Debug.LogError("PlayerMovement: Please assign the cameraTransform in the inspector.");
         }
     }
 
     void Update()
     {
-        // Get input
-        float x = Input.GetAxis("Horizontal"); // A/D
-        float z = Input.GetAxis("Vertical");   // W/S
+        bool isGrounded = characterController.isGrounded;
 
-        // Get camera relative directions (flatten Y axis)
-        Vector3 forward = cameraTransform.forward;
-        Vector3 right = cameraTransform.right;
+        // Small downward force to keep the player "snapped" to the ground
+        if (isGrounded && playerVelocity.y < 0f)
+        {
+            playerVelocity.y = -2f;
+        }
 
-        forward.y = 0f;
-        right.y = 0f;
+        // If movement is locked (dialogue open), we ignore WASD
+        float inputHorizontal = 0f;
+        float inputVertical = 0f;
 
-        forward.Normalize();
-        right.Normalize();
+        if (!isMovementLocked)
+        {
+            inputHorizontal = Input.GetAxis("Horizontal"); // A / D
+            inputVertical = Input.GetAxis("Vertical");     // W / S
+        }
 
-        // Calculate movement direction
-        Vector3 move = right * x + forward * z;
+        // Get camera-relative directions and flatten them
+        Vector3 forwardDirection = cameraTransform.forward;
+        Vector3 rightDirection = cameraTransform.right;
 
-        if (move.magnitude > 1f)
-            move.Normalize();
+        forwardDirection.y = 0f;
+        rightDirection.y = 0f;
 
-        // Move the player
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        forwardDirection.Normalize();
+        rightDirection.Normalize();
+
+        Vector3 moveDirection = rightDirection * inputHorizontal + forwardDirection * inputVertical;
+
+        if (moveDirection.magnitude > 1f)
+        {
+            moveDirection.Normalize();
+        }
+
+        // Decide if we are walking or sprinting
+        float currentSpeed = walkSpeed;
+        if (!isMovementLocked && Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed = sprintSpeed;
+        }
+
+        // Move on the XZ plane
+        characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
+
+        // Jump (only if movement is not locked)
+        if (!isMovementLocked && Input.GetButtonDown("Jump") && isGrounded)
+        {
+            // Standard jump formula: v = sqrt(h * -2 * g)
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravityForce);
+        }
+
+        // Apply gravity to our vertical velocity
+        playerVelocity.y += gravityForce * Time.deltaTime;
+
+        // Apply vertical motion
+        characterController.Move(playerVelocity * Time.deltaTime);
+    }
+
+    // Called by other scripts (like dialogue) to freeze/unfreeze movement
+    public void SetMovementLock(bool shouldLockMovement)
+    {
+        isMovementLocked = shouldLockMovement;
+
+        // stop all horizontal motion instantly
+        if (shouldLockMovement)
+        {
+            playerVelocity.x = 0f;
+            playerVelocity.z = 0f;
+        }
     }
 }
