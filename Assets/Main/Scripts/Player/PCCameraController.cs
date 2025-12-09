@@ -34,4 +34,11 @@ public class PCCameraMouseLook : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
     }
+
+    //Lock the Cursor when called
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 }
