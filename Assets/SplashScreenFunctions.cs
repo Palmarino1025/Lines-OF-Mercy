@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Diagnostics;
+using System.Security.Permissions;
 
 public class SplashScreenFunctions : MonoBehaviour
 {
     [Header("Main Panels")]
     public GameObject menuButtonGroup;
     public GameObject nameEntryPanel;
+    public GameObject hudCanvas;
 
     [Header("Name Entry")]
     public TMP_InputField playerNameInput;
     public GameObject splashScreenCanvas;
+
+    [Header("Camera Controls")]
+    public GameObject mainCamera;
 
     // Hide the splash screen when pressed, show name-setting panel
     public void OnNewGamePressed()
@@ -37,5 +42,7 @@ public class SplashScreenFunctions : MonoBehaviour
 
         // Hide the splash screen, letting the player into the game
         splashScreenCanvas.SetActive(false);
+        hudCanvas.SetActive(true);
+        mainCamera.SetActive(true);
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PCCameraMouseLook : MonoBehaviour
 {
-    public float mouseSensitivity = 2f;   // Mouse sensitivity multiplier
+    public float mouseSensitivity = 0f;   // Mouse sensitivity multiplier
     public bool holdRightMouseToRotate = false; // If true, rotate only when RMB held
 
     private float currentYaw = 0f;   // Horizontal rotation (Y axis)
@@ -16,7 +16,7 @@ public class PCCameraMouseLook : MonoBehaviour
 
         // Optional: lock cursor to center and hide it
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = true;
     }
 
     void Update()
@@ -33,12 +33,5 @@ public class PCCameraMouseLook : MonoBehaviour
         currentPitch = Mathf.Clamp(currentPitch, -80f, 80f);
 
         transform.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
-    }
-
-    //Lock the Cursor when called
-    public void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 }
