@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// This makes sure a CharacterController exists on the same GameObject
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
@@ -23,79 +25,53 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController controller;
 
+    [Header("References")]
+    public Transform cameraTransform;  // Drag your Main Camera here in the Inspector
+
+    private CharacterController characterController;
+    private Vector3 playerVelocity;
+    private bool isMovementLocked = false;
+
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
 
         if (cameraTransform == null)
+        {
             Debug.LogError("Please assign the cameraTransform in the inspector.");
-        if (useGroundCheck && groundCheck == null)
-            Debug.LogWarning("useGroundCheck is true but groundCheck transform is not assigned. Falling back to controller.isGrounded.");
+        }
     }
 
     void Update()
     {
-        // ----- HORIZONTAL MOVEMENT (your existing camera-relative movement) -----
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        // Get input
+        float x = Input.GetAxis("Horizontal"); // A/D
+        float z = Input.GetAxis("Vertical");   // W/S
 
+        // Get camera relative directions (flatten Y axis)
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 
-        forward.y = 0f;
-        right.y = 0f;
+        // Move on the XZ plane
+        characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
 
-        forward.Normalize();
-        right.Normalize();
+        // Jump (only if movement is not locked)
+        if (!isMovementLocked && Input.GetButtonDown("Jump") && isGrounded)
+        {
+            // Standard jump formula: v = sqrt(h * -2 * g)
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravityForce);
+        }
 
+        // Apply gravity to our vertical velocity
+        playerVelocity.y += gravityForce * Time.deltaTime;
+
+        // Calculate movement direction
         Vector3 move = right * x + forward * z;
-        if (move.magnitude > 1f) move.Normalize();
 
-        // ----- GROUND CHECK -----
-        bool grounded = false;
-        if (useGroundCheck && groundCheck != null)
-        {
-            grounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        }
-        else
-        {
-            grounded = controller.isGrounded;
-        }
+        if (move.magnitude > 1f)
+            move.Normalize();
 
-        // ----- GRAVITY -----
-        // If grounded and falling, set to small negative to keep grounded
-        if (grounded && velocity.y < 0f)
-        {
-            velocity.y = -2f;
-        }
-
-        // integrate gravity (gravity is negative)
-        velocity.y += gravity * gravityScale * Time.deltaTime;
-
-        // ----- JUMP (optional) -----
-        if (grounded && Input.GetKeyDown(jumpKey))
-        {
-            // compute initial velocity to reach jumpHeight: v = sqrt(2 * -gravity * jumpHeight)
-            // note: gravity must be negative (e.g. -9.81)
-            float effectiveGravity = gravity * gravityScale;
-            if (effectiveGravity == 0f) effectiveGravity = -9.81f * gravityScale;
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * effectiveGravity);
-        }
-
-        // ----- APPLY MOVEMENT -----
-        // Combine horizontal (move * moveSpeed) with vertical velocity
-        Vector3 combined = move * moveSpeed + new Vector3(0f, velocity.y, 0f);
-
-        controller.Move(combined * Time.deltaTime);
-    }
-
-    // debug visualization for ground check
-    void OnDrawGizmosSelected()
-    {
-        if (useGroundCheck && groundCheck != null)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
-        }
+        // Move the player
+        controller.Move(move * moveSpeed * Time.deltaTime);
     }
 }
