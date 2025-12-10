@@ -4,13 +4,26 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement Speeds")]
-    public float walkSpeed = 4f;
-    public float sprintSpeed = 7f;
+    [Header("Movement")]
+    public float moveSpeed = 6f;
+    public Transform cameraTransform;  // assign main camera in Inspector
 
-    [Header("Jump / Gravity")]
-    public float jumpHeight = 1.5f;
-    public float gravityForce = -9.81f; // Negative because gravity pulls down
+    [Header("Gravity / Jump")]
+    public float gravity = -9.81f;     // base gravity (negative). Use -9.81 for earth-like.
+    public float gravityScale = 2f;    // tune to make falls faster/slower
+    private Vector3 velocity;          // vertical velocity stored here
+
+    [Header("Ground Check (optional)")]
+    public bool useGroundCheck = false; // if true uses custom ground check, otherwise uses controller.isGrounded
+    public Transform groundCheck;       // small transform at feet; assign in Inspector if useGroundCheck = true
+    public float groundDistance = 0.2f; // sphere radius for ground check
+    public LayerMask groundMask;        // which layers count as ground
+
+    [Header("Jump (optional)")]
+    public float jumpHeight = 1.5f;     // jump height in meters
+    public KeyCode jumpKey = KeyCode.Space;
+
+    private CharacterController controller;
 
     [Header("References")]
     public Transform cameraTransform;  // Drag your Main Camera here in the Inspector
@@ -25,53 +38,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (cameraTransform == null)
         {
-            Debug.LogError("PlayerMovement: Please assign the cameraTransform in the inspector.");
+            Debug.LogError("Please assign the cameraTransform in the inspector.");
         }
     }
 
     void Update()
     {
-        bool isGrounded = characterController.isGrounded;
+        // Get input
+        float x = Input.GetAxis("Horizontal"); // A/D
+        float z = Input.GetAxis("Vertical");   // W/S
 
-        // Small downward force to keep the player "snapped" to the ground
-        if (isGrounded && playerVelocity.y < 0f)
-        {
-            playerVelocity.y = -2f;
-        }
-
-        // If movement is locked (dialogue open), we ignore WASD
-        float inputHorizontal = 0f;
-        float inputVertical = 0f;
-
-        if (!isMovementLocked)
-        {
-            inputHorizontal = Input.GetAxis("Horizontal"); // A / D
-            inputVertical = Input.GetAxis("Vertical");     // W / S
-        }
-
-        // Get camera-relative directions and flatten them
-        Vector3 forwardDirection = cameraTransform.forward;
-        Vector3 rightDirection = cameraTransform.right;
-
-        forwardDirection.y = 0f;
-        rightDirection.y = 0f;
-
-        forwardDirection.Normalize();
-        rightDirection.Normalize();
-
-        Vector3 moveDirection = rightDirection * inputHorizontal + forwardDirection * inputVertical;
-
-        if (moveDirection.magnitude > 1f)
-        {
-            moveDirection.Normalize();
-        }
-
-        // Decide if we are walking or sprinting
-        float currentSpeed = walkSpeed;
-        if (!isMovementLocked && Input.GetKey(KeyCode.LeftShift))
-        {
-            currentSpeed = sprintSpeed;
-        }
+        // Get camera relative directions (flatten Y axis)
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
 
         // Move on the XZ plane
         characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
@@ -86,20 +65,13 @@ public class PlayerMovement : MonoBehaviour
         // Apply gravity to our vertical velocity
         playerVelocity.y += gravityForce * Time.deltaTime;
 
-        // Apply vertical motion
-        characterController.Move(playerVelocity * Time.deltaTime);
-    }
+        // Calculate movement direction
+        Vector3 move = right * x + forward * z;
 
-    // Called by other scripts (like dialogue) to freeze/unfreeze movement
-    public void SetMovementLock(bool shouldLockMovement)
-    {
-        isMovementLocked = shouldLockMovement;
+        if (move.magnitude > 1f)
+            move.Normalize();
 
-        // stop all horizontal motion instantly
-        if (shouldLockMovement)
-        {
-            playerVelocity.x = 0f;
-            playerVelocity.z = 0f;
-        }
+        // Move the player
+        controller.Move(move * moveSpeed * Time.deltaTime);
     }
 }
