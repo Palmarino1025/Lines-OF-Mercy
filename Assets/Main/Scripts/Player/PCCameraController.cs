@@ -1,28 +1,38 @@
 using UnityEngine;
 
-public class PCCameraMouseLook : MonoBehaviour
+public class PCCameraController : MonoBehaviour
 {
-    public float mouseSensitivity = 2f;   // Mouse sensitivity multiplier
-    public bool holdRightMouseToRotate = false; // If true, rotate only when RMB held
+    [Header("Mouse Look")]
+    public float mouseSensitivity = 2f;
+    public bool holdRightMouseToRotate = false;
 
-    private float currentYaw = 0f;   // Horizontal rotation (Y axis)
-    private float currentPitch = 0f; // Vertical rotation (X axis)
+    private float currentYaw = 0f;
+    private float currentPitch = 0f;
+    private bool isCameraLookEnabled = true;
 
     void Start()
     {
-        Vector3 angles = transform.eulerAngles;
-        currentYaw = angles.y;
-        currentPitch = angles.x;
+        Vector3 startAngles = transform.eulerAngles;
+        currentYaw = startAngles.y;
+        currentPitch = startAngles.x;
 
-        // Optional: lock cursor to center and hide it
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Start with camera look enabled (gameplay mode)
+        EnableCameraLook(true);
     }
 
     void Update()
     {
-        if (holdRightMouseToRotate && !Input.GetMouseButton(1))
+        // If dialogue is active we do not rotate the camera
+        if (!isCameraLookEnabled)
+        {
             return;
+        }
+
+        // Optional: only rotate while RMB is held
+        if (holdRightMouseToRotate && !Input.GetMouseButton(1))
+        {
+            return;
+        }
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -33,5 +43,22 @@ public class PCCameraMouseLook : MonoBehaviour
         currentPitch = Mathf.Clamp(currentPitch, -80f, 80f);
 
         transform.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
+    }
+
+    // This will be called when a dialogue opens/closes
+    public void EnableCameraLook(bool enableLook)
+    {
+        isCameraLookEnabled = enableLook;
+
+        if (enableLook)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
