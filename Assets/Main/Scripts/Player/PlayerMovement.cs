@@ -71,4 +71,13 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(playerVelocity * Time.deltaTime);
     }
+
+    public void SetMovementLock(bool state)
+    {
+        isMovementLocked = state;
+
+        // Also stop current motion so they don't slide while frozen
+        if (state)
+            playerVelocity = Vector3.zero;
+    }
 }

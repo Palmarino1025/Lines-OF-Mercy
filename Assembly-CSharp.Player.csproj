@@ -63,10 +63,10 @@
     <Compile Include="Assets\Main\Scripts\Player\PCCameraController.cs" />
     <Compile Include="Assets\Main\Scripts\UI\SplashLoader.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Main\Scripts\Player\DialogueFreezeController.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Main\Scripts\UI\MicIndicator.cs" />
     <Compile Include="Assets\Main\Scripts\NPC\NpcInteraction.cs" />
-    <Compile Include="Assets\Main\Scripts\Player\PCCamera.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
