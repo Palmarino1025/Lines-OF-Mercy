@@ -1,22 +1,27 @@
 using UnityEngine;
-using UnityEngine.UI;
 using PixelCrushers.DialogueSystem;
+using UnityEngine.UI;
 
 public class TypedInputReset : MonoBehaviour
 {
-    
+    [Header("UI")]
     public InputField typedInputField;
 
-    // Call this from Dialogue System Events (OnConversationStart and OnConversationEnd)
+    [Header("Dialogue System")]
+    public string variableName = "playerTypedText";  // must match the variable you use
+
     public void ResetTypedInput()
     {
-        // Clear the dialogue system variable used by TextInput
-        DialogueLua.SetVariable("playerTypedText", "");
-
-        // Clear the visual text in the UI
+        // 1. Clear the UI text
         if (typedInputField != null)
         {
-            typedInputField.text = "";
+            typedInputField.text = string.Empty;
+        }
+
+        // 2. Clear the Dialogue System variable
+        if (!string.IsNullOrEmpty(variableName))
+        {
+            DialogueLua.SetVariable(variableName, string.Empty);
         }
     }
 }

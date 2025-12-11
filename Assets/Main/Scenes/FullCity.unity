@@ -32142,6 +32142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typedInputField: {fileID: 1692360291}
+  variableName: playerTypedText
 --- !u!1001 &2140187505
 PrefabInstance:
   m_ObjectHideFlags: 0
