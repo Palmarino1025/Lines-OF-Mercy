@@ -70,6 +70,8 @@
     <Compile Include="Assets\Main\Scripts\UI\MicIndicator.cs" />
     <Compile Include="Assets\Main\Scripts\Dialogue\TypedResponseUI.cs" />
     <Compile Include="Assets\Main\Scripts\NPC\NpcInteraction.cs" />
+    <Compile Include="Assets\Main\Scripts\UI\KarmaHUD.cs" />
+    <Compile Include="Assets\Main\Scripts\Core\KarmaDialogueBridge.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
