@@ -8,7 +8,7 @@ public class PCCameraController : MonoBehaviour
 
     private float currentYaw = 0f;
     private float currentPitch = 0f;
-    private bool isCameraLookEnabled = true;
+    public bool isCameraLookEnabled = true;
 
     void Start()
     {

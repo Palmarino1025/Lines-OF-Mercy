@@ -13,7 +13,7 @@ public class NpcInteraction : MonoBehaviour
     public string conversationTitle = "Test Conversation";
 
     // True only while the player is inside the interaction trigger
-    private bool isPlayerInsideInteractionRange = false;
+    public bool isPlayerInsideInteractionRange = false;
 
     // keep a reference to the player who entered the trigger
     private Transform playerTransform;

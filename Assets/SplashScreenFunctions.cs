@@ -42,7 +42,6 @@ public class SplashScreenFunctions : MonoBehaviour
 
         // Hide the splash screen, letting the player into the game
         splashScreenCanvas.SetActive(false);
-        hudCanvas.SetActive(true);
         mainCamera.SetActive(true);
     }
 }
