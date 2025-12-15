@@ -16,8 +16,8 @@ public class SplashScreenFunctions : MonoBehaviour
     public TMP_InputField playerNameInput;
     public GameObject splashScreenCanvas;
 
-    [Header("Camera Controls")]
-    public GameObject mainCamera;
+    [Header("Player")]
+    public GameObject player;
 
     // Hide the splash screen when pressed, show name-setting panel
     public void OnNewGamePressed()
@@ -32,16 +32,26 @@ public class SplashScreenFunctions : MonoBehaviour
         string playerName = playerNameInput.text;
 
         if (string.IsNullOrEmpty(playerName))
-        {
-            UnityEngine.Debug.Log("Player name is empty.");
             return;
-        }
 
-        // Save name somewhere (just printing it for now)
-        UnityEngine.Debug.Log("Player name: " + playerName);
+        // Set the player's name as what they typed and save it
+        DataManager.Instance.SetPlayerName(playerName);
 
-        // Hide the splash screen, letting the player into the game
+        // Update the HUD with entered name
+        HUDPlayerName hud = FindObjectOfType<HUDPlayerName>();
+        if (hud != null)
+            hud.UpdatePlayerName();
+
+        // Hide the splash screen, activating the player and letting them into the game
         splashScreenCanvas.SetActive(false);
-        mainCamera.SetActive(true);
+        hudCanvas.SetActive(true);
+        player.SetActive(true);
+    }
+
+    public void OnLoadPressed()
+    {
+        splashScreenCanvas.SetActive(false);
+        hudCanvas.SetActive(true);
+        player.SetActive(true);
     }
 }
