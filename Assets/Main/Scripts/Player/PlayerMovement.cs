@@ -1,45 +1,83 @@
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
     public float moveSpeed = 6f;
-    public Transform cameraTransform;  // Assign your main camera here in Inspector
+    public float sprintMultiplier = 1.7f;     // how fast sprinting is relative to walk
+    public KeyCode sprintKey = KeyCode.LeftShift;
+
+    public Transform cameraTransform;
+
+    [Header("Gravity / Jump")]
+    public float gravity = -9.81f;
+    public float gravityScale = 2f;
+    private Vector3 playerVelocity;
+
+    [Header("Ground Check (optional)")]
+    public bool useGroundCheck = false;
+    public Transform groundCheck;
+    public float groundDistance = 0.2f;
+    public LayerMask groundMask;
+
+    [Header("Jump (optional)")]
+    public float jumpHeight = 1.5f;
+    public KeyCode jumpKey = KeyCode.Space;
 
     private CharacterController controller;
+    private bool isMovementLocked = false;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
 
         if (cameraTransform == null)
-        {
-            Debug.LogError("Please assign the cameraTransform in the inspector.");
-        }
+            Debug.LogError("Assign the Camera Transform to PlayerMovement.");
     }
 
     void Update()
     {
-        // Get input
-        float x = Input.GetAxis("Horizontal"); // A/D
-        float z = Input.GetAxis("Vertical");   // W/S
+        bool isGrounded = useGroundCheck ?
+            Physics.CheckSphere(groundCheck.position, groundDistance, groundMask) :
+            controller.isGrounded;
 
-        // Get camera relative directions (flatten Y axis)
-        Vector3 forward = cameraTransform.forward;
-        Vector3 right = cameraTransform.right;
+        if (isGrounded && playerVelocity.y < 0)
+            playerVelocity.y = -2f;
 
-        forward.y = 0f;
-        right.y = 0f;
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        forward.Normalize();
-        right.Normalize();
+        Vector3 forward = cameraTransform.forward; forward.y = 0;
+        Vector3 right = cameraTransform.right; right.y = 0;
 
-        // Calculate movement direction
-        Vector3 move = right * x + forward * z;
+        Vector3 move = (right * x + forward * z).normalized;
 
-        if (move.magnitude > 1f)
-            move.Normalize();
+        // ---------------------
+        //   🏃 Sprint Logic
+        // ---------------------
+        float currentSpeed = moveSpeed;
 
-        // Move the player
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        if (Input.GetKey(sprintKey) && isGrounded && !isMovementLocked && move.magnitude > 0.1f)
+            currentSpeed *= sprintMultiplier;
+
+        if (!isMovementLocked)
+            controller.Move(move * currentSpeed * Time.deltaTime);
+
+        if (!isMovementLocked && Input.GetKeyDown(jumpKey) && isGrounded)
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity * gravityScale);
+
+        playerVelocity.y += gravity * gravityScale * Time.deltaTime;
+
+        controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    public void SetMovementLock(bool state)
+    {
+        isMovementLocked = state;
+
+        // Also stop current motion so they don't slide while frozen
+        if (state)
+            playerVelocity = Vector3.zero;
     }
 }
