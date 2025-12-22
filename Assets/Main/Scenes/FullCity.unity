@@ -34876,6 +34876,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7958836802638688338, guid: b5c2dd91c47213548afc07b97fd5efcf,
+        type: 3}
+      propertyPath: displaySettings.subtitleSettings.continueButton
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958836802638688338, guid: b5c2dd91c47213548afc07b97fd5efcf,
+        type: 3}
+      propertyPath: displaySettings.subtitleSettings.minSubtitleSeconds
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958836802638688338, guid: b5c2dd91c47213548afc07b97fd5efcf,
+        type: 3}
+      propertyPath: displaySettings.subtitleSettings.subtitleCharsPerSecond
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958836802638688338, guid: b5c2dd91c47213548afc07b97fd5efcf,
+        type: 3}
+      propertyPath: displaySettings.subtitleSettings.requireContinueOnLastLine
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8588729725544076138, guid: b5c2dd91c47213548afc07b97fd5efcf,
         type: 3}
       propertyPath: m_Text
