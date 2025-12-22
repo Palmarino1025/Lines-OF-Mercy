@@ -37,6 +37,12 @@ public class SplashScreenFunctions : MonoBehaviour
         // Set the player's name as what they typed and save it
         DataManager.Instance.SetPlayerName(playerName);
 
+        // Reset Karma for new game
+        if (KarmaEngine.Instance != null)
+        {
+            KarmaEngine.Instance.ResetKarma();
+        }
+
         // Update the HUD with entered name
         HUDPlayerName hud = FindObjectOfType<HUDPlayerName>();
         if (hud != null)

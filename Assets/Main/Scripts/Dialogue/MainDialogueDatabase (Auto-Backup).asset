@@ -264,8 +264,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 500.0393
-        y: 97.421326
+        x: 513.9401
+        y: 70.81006
         width: 160
         height: 30
     - id: 1
@@ -348,8 +348,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 501.9334
-        y: 225.82773
+        x: 515.8575
+        y: 201.7771
         width: 160
         height: 30
     - id: 2
@@ -998,8 +998,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1027.3425
-        y: 326.3989
+        x: 1002.3425
+        y: 361.01428
         width: 160
         height: 30
     - id: 14
@@ -1053,8 +1053,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1029.9667
-        y: 420.9343
+        x: 1004.9667
+        y: 451.70358
         width: 160
         height: 30
     - id: 15
@@ -1102,8 +1102,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1034.7522
-        y: 518.2791
+        x: 1003.98303
+        y: 535.58685
         width: 160
         height: 30
     - id: 16
@@ -1157,13 +1157,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1259.0502
-        y: 287.37445
+        x: 1189.8193
+        y: 320.06674
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 173.00006, y: 120.546844}
-    canvasZoom: 0.9999995
+    canvasScrollPosition: {x: 0, y: 63.95765}
+    canvasZoom: 0.66999984
   - id: 2
     fields:
     - title: Title

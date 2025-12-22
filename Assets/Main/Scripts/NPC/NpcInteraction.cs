@@ -18,6 +18,8 @@ public class NpcInteraction : MonoBehaviour
     // keep a reference to the player who entered the trigger
     private Transform playerTransform;
 
+    private PCCameraController cameraController;
+
     private void Start()
     {
         // ensure the prompt is hidden at start of game
@@ -74,6 +76,13 @@ public class NpcInteraction : MonoBehaviour
         // Hide the "Press E" prompt while we are talking
         ShowInteractionPrompt(false);
 
+        CacheCameraController();
+
+        if (cameraController != null)
+        {
+            cameraController.EnableCameraLook(false);
+        }
+
         if (playerTransform != null)
         {
             // player = actor, npc = conversant
@@ -83,6 +92,56 @@ public class NpcInteraction : MonoBehaviour
         {
             // Fallback if we somehow lost the player reference
             DialogueManager.StartConversation(conversationTitle);
+        }
+    }
+
+    public void ApplyKarma(
+        float mobLoyalty,
+        float policeLoyalty,
+        float mercy,
+        float ruthlessness)
+    {
+        if (KarmaEngine.Instance == null)
+        {
+            Debug.LogError("[NpcInteraction] KarmaEngine not found!");
+            return;
+        }
+
+        KarmaEngine.Instance.ApplyKarmaDelta(
+            mobLoyalty,
+            policeLoyalty,
+            mercy,
+            ruthlessness
+        );
+
+        Debug.Log("[NpcInteraction] Karma applied from dialogue choice.");
+    }
+
+    private void CacheCameraController()
+    {
+        if (cameraController == null)
+        {
+            cameraController = FindObjectOfType<PCCameraController>();
+        }
+    }
+    private void OnEnable()
+    {
+        DialogueManager.instance.conversationEnded += OnConversationEnded;
+    }
+
+    private void OnDisable()
+    {
+        if (DialogueManager.instance != null)
+            DialogueManager.instance.conversationEnded -= OnConversationEnded;
+    }
+
+    private void OnConversationEnded(Transform actor)
+    {
+        CacheCameraController();
+
+        if (cameraController != null)
+        {
+            cameraController.EnableCameraLook(true);
         }
     }
 }
