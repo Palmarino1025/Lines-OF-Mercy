@@ -31,7 +31,7 @@ Inside Unity Hub:
 
 ### Pre-Alpha (Completed)
 - Third-person player movement and camera control  
-- Dialogue System integration (Pixel Crushers / Yarn Spinner)  
+- Dialogue System integration (Pixel Crushers)  
 - Typed player input capture  
 - Base NPC interaction logic  
 - Initial dialogue flow and branching structure  
