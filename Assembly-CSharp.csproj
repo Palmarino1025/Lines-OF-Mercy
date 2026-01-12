@@ -60,20 +60,28 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f3\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Main\Scripts\UI\PauseMenuManager.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PCCameraController.cs" />
     <Compile Include="Assets\Main\Scripts\UI\SplashLoader.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Main\Scripts\Core\KarmaEngine.cs" />
     <Compile Include="Assets\Main\Scripts\Dialogue\TypedInputReset.cs" />
+    <Compile Include="Assets\Main\Scripts\UI\PauseController.cs" />
+    <Compile Include="Assets\Main\Scripts\UI\StaminaUI.cs" />
+    <Compile Include="Assets\Main\Scripts\AI\HostedInferenceProvider.cs" />
     <Compile Include="Assets\SplashScreenFunctions.cs" />
+    <Compile Include="Assets\Main\Scripts\AI\AITypedInputOrchestrator.cs" />
     <Compile Include="Assets\Main\Scripts\Player\DialogueFreezeController.cs" />
     <Compile Include="Assets\PauseMenuFunctions.cs" />
+    <Compile Include="Assets\Main\Scripts\AI\IAIProvider.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Main\Scripts\UI\MicIndicator.cs" />
+    <Compile Include="Assets\Main\Scripts\AI\AITypedKarmaMapper.cs" />
     <Compile Include="Assets\Main\Scripts\Dialogue\TypedResponseUI.cs" />
     <Compile Include="Assets\Main\Scripts\NPC\NpcInteraction.cs" />
     <Compile Include="Assets\Main\Scripts\UI\KarmaHUD.cs" />
     <Compile Include="Assets\Main\Scripts\Core\KarmaDialogueBridge.cs" />
+    <Compile Include="Assets\Main\Scripts\AI\AIResultTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
