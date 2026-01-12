@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
@@ -27,6 +28,13 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController controller;
     private bool isMovementLocked = false;
+
+    //------------------
+    // Exposed State for UI
+    //------------------
+
+    public bool IsSprinting {  get; private set; }
+    public bool IsMoving { get; private set; }
 
     void Start()
     {
@@ -58,6 +66,14 @@ public class PlayerMovement : MonoBehaviour
         // ---------------------
         float currentSpeed = moveSpeed;
 
+        IsMoving = move.magnitude > 0.1f;
+
+        IsSprinting =
+            Input.GetKey(sprintKey) &&
+            isGrounded &&
+            !isMovementLocked &&
+            IsMoving;
+
         if (Input.GetKey(sprintKey) && isGrounded && !isMovementLocked && move.magnitude > 0.1f)
             currentSpeed *= sprintMultiplier;
 
@@ -70,14 +86,20 @@ public class PlayerMovement : MonoBehaviour
         playerVelocity.y += gravity * gravityScale * Time.deltaTime;
 
         controller.Move(playerVelocity * Time.deltaTime);
-    }
 
-    public void SetMovementLock(bool state)
+}
+
+public void SetMovementLock(bool state)
     {
         isMovementLocked = state;
 
         // Also stop current motion so they don't slide while frozen
         if (state)
+        {
             playerVelocity = Vector3.zero;
+            IsSprinting = false;
+            IsMoving = false;
+        }
+        
     }
 }
