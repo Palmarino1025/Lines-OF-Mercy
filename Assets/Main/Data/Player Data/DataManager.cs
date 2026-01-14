@@ -7,9 +7,7 @@ using static System.Net.Mime.MediaTypeNames;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
-
     public PlayerData playerData;
-
     private string savePath;
 
     void Awake()
@@ -65,5 +63,22 @@ public class DataManager : MonoBehaviour
             return "";
 
         return playerData.playerName;
+    }
+
+    // NPC Relationships
+    public NpcRelationshipData GetNpcRelationship(string npcId)
+    {
+        var list = playerData.npcRelationships;
+
+        var npc = list.Find(n => n.npcId == npcId);
+
+        if (npc == null)
+        {
+            npc = new NpcRelationshipData(npcId);
+            list.Add(npc);
+            SavePlayerData();
+        }
+
+        return npc;
     }
 }
