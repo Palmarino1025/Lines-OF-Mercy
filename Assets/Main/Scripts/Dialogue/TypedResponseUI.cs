@@ -1,36 +1,66 @@
 using UnityEngine;
-using UnityEngine.UI;           // For InputField
-using PixelCrushers.DialogueSystem;  // For DialogueLua
+using UnityEngine.UI;
+using PixelCrushers.DialogueSystem;
 
+/// <summary>
+/// Handles the player's typed input.
+/// We are NOT using a Submit button.
+/// DSU (Standard UI Input Field) calls SubmitTypedResponse() when Enter is pressed.
+/// </summary>
 public class TypedResponseUI : MonoBehaviour
 {
-    // Reference to the Unity UI InputField where the player types.
+    [Header("UI Input")]
     public InputField typedInputField;
 
-    // Name of the Dialogue System variable where we'll store the text.
+    [Header("Dialogue System Variable")]
     public string dialogueVariableName = "playerTypedText";
 
-    // If true, we'll log the text to the Console for debugging.
+    [Header("AI Orchestrator")]
+    public AITypedInputOrchestrator aiOrchestrator;
+
+    [Header("Debug")]
     public bool logToConsole = true;
 
-    // This method will be called by the Submit button and by the Enter key.
-    public void SubmitTypedResponse()
+    private void Awake()
     {
+        // Safety check: make sure the input field is assigned
         if (typedInputField == null)
         {
             Debug.LogWarning("TypedResponseUI: typedInputField is not assigned.");
+        }
+
+        // IMPORTANT:
+        // If Unity loses the reference (common with UI/prefabs),
+        // we auto-find the orchestrator at runtime.
+        if (aiOrchestrator == null)
+        {
+            aiOrchestrator = FindFirstObjectByType<AITypedInputOrchestrator>();
+        }
+    }
+
+    /// <summary>
+    /// This is called by DSU's Standard UI Input Field "On Accept()"
+    /// when the player presses Enter.
+    /// </summary>
+    public void SubmitTypedResponse()
+    {
+        Debug.Log("TypedResponseUI on object: " + gameObject.name);
+
+        if (typedInputField == null)
+        {
+            Debug.LogWarning("TypedResponseUI: typedInputField is missing.");
             return;
         }
 
         string playerText = typedInputField.text;
 
-        // Do nothing if the player didn't type anything.
+        // Ignore empty input
         if (string.IsNullOrWhiteSpace(playerText))
         {
             return;
         }
 
-        // Store the text into a Dialogue System variable so we can use it later.
+        // Store into DSU variable so DSU can reference what the player typed
         DialogueLua.SetVariable(dialogueVariableName, playerText);
 
         if (logToConsole)
@@ -38,10 +68,26 @@ public class TypedResponseUI : MonoBehaviour
             Debug.Log("TypedResponseUI: Player typed -> " + playerText);
         }
 
-        // Clear the field for the next input.
+        // If reference is missing, try to find it again (extra safe)
+        if (aiOrchestrator == null)
+        {
+            aiOrchestrator = FindFirstObjectByType<AITypedInputOrchestrator>();
+        }
+
+        // Send to AI
+        if (aiOrchestrator != null)
+        {
+            aiOrchestrator.AnalyzeAndApply(playerText);
+        }
+        else
+        {
+            Debug.LogWarning("TypedResponseUI: aiOrchestrator is not assigned (and could not be found).");
+        }
+
+        // Clear the field for the next line
         typedInputField.text = string.Empty;
 
-        // Put focus back in the field, so they can type again if needed.
+        // Put focus back so the player can keep typing naturally
         typedInputField.ActivateInputField();
     }
 }
