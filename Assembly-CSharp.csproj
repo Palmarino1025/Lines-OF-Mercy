@@ -62,7 +62,6 @@
     <Compile Include="Assets\Main\Scripts\UI\PauseMenuManager.cs" />
     <Compile Include="Assets\Main\Data\Player Data\PlayerData.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PCCameraController.cs" />
-    <Compile Include="Assets\Main\Scripts\NPCs\NpcInteraction.cs" />
     <Compile Include="Assets\Main\Scripts\UI\SplashLoader.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Main\Scripts\Core\KarmaEngine.cs" />
@@ -79,14 +78,12 @@
     <Compile Include="Assets\Main\Scripts\UI\MicIndicator.cs" />
     <Compile Include="Assets\Main\Scripts\AI\AITypedKarmaMapper.cs" />
     <Compile Include="Assets\Main\Scripts\Dialogue\TypedResponseUI.cs" />
-    <Compile Include="Assets\DialogueLuaBridge.cs" />
+    <Compile Include="Assets\Main\Scripts\NPC\NpcInteraction.cs" />
     <Compile Include="Assets\Main\Scripts\UI\KarmaHUD.cs" />
     <Compile Include="Assets\Main\Scripts\Core\KarmaDialogueBridge.cs" />
     <Compile Include="Assets\Main\Scripts\AI\AIResultTypes.cs" />
     <Compile Include="Assets\HUDPlayerName.cs" />
-    <Compile Include="Assets\Main\Scripts\NPCs\NPCPreferences.cs" />
     <Compile Include="Assets\Main\Data\Player Data\DataManager.cs" />
-    <Compile Include="Assets\Main\Data\NPCRelationshipData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

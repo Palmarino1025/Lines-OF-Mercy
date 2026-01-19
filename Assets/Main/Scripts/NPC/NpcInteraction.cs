@@ -3,12 +3,6 @@ using PixelCrushers.DialogueSystem;  // connect to Dialogue System
 
 public class NpcInteraction : MonoBehaviour
 {
-    [Header("NPC Identity")]
-    public string npcId = "Mob_NPC";
-
-    [Header("Karma Preferences")]
-    public NpcPreferenceProfile preferenceProfile;
-
     // player object Tag
     public string playerTagName = "Player";
 
@@ -149,27 +143,5 @@ public class NpcInteraction : MonoBehaviour
         {
             cameraController.EnableCameraLook(true);
         }
-    }
-
-    public void EvaluatePlayerAlignment()
-    {
-        if (DataManager.Instance == null) return;
-
-        var npcData = DataManager.Instance.GetNpcRelationship(npcId);
-
-        float alignmentScore =
-            KarmaEngine.Instance.mobLoyalty * preferenceProfile.mobLoyaltyWeight +
-            KarmaEngine.Instance.policeLoyalty * preferenceProfile.policeLoyaltyWeight +
-            KarmaEngine.Instance.mercy * preferenceProfile.mercyWeight +
-            KarmaEngine.Instance.ruthlessness * preferenceProfile.ruthlessnessWeight;
-
-        npcData.affinity += alignmentScore * 0.1f;
-        npcData.affinity = Mathf.Clamp(npcData.affinity, -100f, 100f);
-
-        DataManager.Instance.SavePlayerData();
-
-        Debug.Log($"[NPC:{npcId}] Alignment reaction: {npcData.affinity}");
-
-        DialogueLua.SetVariable("MobNPC_Alignment", npcData.affinity);
     }
 }
