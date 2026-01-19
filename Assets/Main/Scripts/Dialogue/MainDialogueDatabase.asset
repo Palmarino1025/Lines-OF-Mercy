@@ -239,7 +239,7 @@ MonoBehaviour:
   - id: 12
     fields:
     - title: Name
-      value: AI_PC_Line
+      value: AI_NPC_Line
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value

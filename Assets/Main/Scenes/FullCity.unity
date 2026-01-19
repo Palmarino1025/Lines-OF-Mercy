@@ -10403,8 +10403,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1705639260}
+  m_Children: []
   m_Father: {fileID: 843659891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -37999,6 +37998,89 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047669938}
   m_CullTransparentMesh: 1
+--- !u!1 &2052758842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052758846}
+  - component: {fileID: 2052758845}
+  - component: {fileID: 2052758844}
+  - component: {fileID: 2052758843}
+  m_Layer: 0
+  m_Name: AI_System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2052758843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052758842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c33537d74aade24498a694500ec6dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minConfidenceToApplyKarma: 0.55
+--- !u!114 &2052758844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052758842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d7a6bdb6a5b9f4882b04521448fde3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiProvider: {fileID: 2052758845}
+  karmaMapper: {fileID: 2052758843}
+  dsuPlayerTextVar: AI_PlayerText
+  dsuToneVar: AI_Tone
+  dsuIntentVar: AI_Intent
+  dsuTargetVar: AI_Target
+  dsuConfidenceVar: AI_Confidence
+  dsuNpcLineVar: AI_NPC_Line
+  contextTag: Default
+--- !u!114 &2052758845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052758842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe526d3df61cb80429a16a7d40fd619c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endpointUrl: https://itsjustmeh-lines-of-mercy-ai.hf.space/analyze
+  bearerToken: 'lines_of_mercy_super_secret_token_2025 '
+  timeoutSeconds: 4.5
+--- !u!4 &2052758846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052758842}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.837972, y: 2.4598813, z: -25.219032}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2057140895
 GameObject:
   m_ObjectHideFlags: 0
@@ -40056,7 +40138,7 @@ PrefabInstance:
         type: 3}
       propertyPath: aiOrchestrator
       value: 
-      objectReference: {fileID: 1706415570}
+      objectReference: {fileID: 2052758844}
     - target: {fileID: 7958836802632680150, guid: b5c2dd91c47213548afc07b97fd5efcf,
         type: 3}
       propertyPath: m_Name
@@ -40747,11 +40829,9 @@ SceneRoots:
   - {fileID: 497878534}
   - {fileID: 191424038}
   - {fileID: 858218838}
-  - {fileID: 1831378097}
-  - {fileID: 1663816620}
   - {fileID: 7783362318586034285}
   - {fileID: 742913684}
   - {fileID: 939605197}
   - {fileID: 1009820329}
   - {fileID: 1887132427}
-  - {fileID: 1706415573}
+  - {fileID: 2052758846}
