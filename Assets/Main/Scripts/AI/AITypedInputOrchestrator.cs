@@ -53,6 +53,18 @@ public class AITypedInputOrchestrator : MonoBehaviour
         {
             yield break;
         }
+        Debug.Log(
+            "AI RESPONSE >> " +
+            "Persona=" + personaKey +
+            " | Tone=" + result.tone +
+            " | Intent=" + result.intent +
+            " | Target=" + result.target +
+            " | Confidence=" + result.confidence +
+            " | NPC Line=\"" + result.npcLine + "\""
+            );
+
+
+
 
         // Push AI outputs into DSU so DSU can branch (Option 1).
         DialogueLua.SetVariable(dsuToneVar, result.tone);
