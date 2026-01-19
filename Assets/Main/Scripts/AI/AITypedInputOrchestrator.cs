@@ -18,6 +18,8 @@ public class AITypedInputOrchestrator : MonoBehaviour
 
     [Header("Context")]
     public string contextTag = "Default"; // set per NPC or per conversation
+                                          // persona key to select JSON persona on the Hugging Face backend
+    public string personaKey = "default"; // ex: "mob_rico", "cop_holt"
 
     public void AnalyzeAndApply(string playerText)
     {
@@ -42,7 +44,7 @@ public class AITypedInputOrchestrator : MonoBehaviour
 
         AIAnalysisResult result = null;
 
-        yield return aiProvider.AnalyzeTypedInput(playerText, contextTag, (r) =>
+        yield return aiProvider.AnalyzeTypedInput(playerText, contextTag, personaKey, (r) =>
         {
             result = r;
         });
