@@ -1219,6 +1219,26 @@ MonoBehaviour:
         width: 160
         height: 30
     - id: 17
+      fields: []
+      conversationID: 0
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: 
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 160
+        height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 0.6099999
@@ -1375,8 +1395,6 @@ MonoBehaviour:
     entryGroups: []
     canvasScrollPosition: {x: 85.22783, y: 0}
     canvasZoom: 0.78
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1
   - id: 3
     fields:
     - title: Title

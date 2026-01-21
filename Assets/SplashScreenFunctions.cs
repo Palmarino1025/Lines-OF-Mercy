@@ -11,6 +11,7 @@ public class SplashScreenFunctions : MonoBehaviour
     public GameObject menuButtonGroup;
     public GameObject nameEntryPanel;
     public GameObject hudCanvas;
+    public GameObject settingsCanvas;
 
     [Header("Name Entry")]
     public TMP_InputField playerNameInput;
@@ -54,10 +55,18 @@ public class SplashScreenFunctions : MonoBehaviour
         player.SetActive(true);
     }
 
+    // Continue with all previous save data
     public void OnLoadPressed()
     {
         splashScreenCanvas.SetActive(false);
         hudCanvas.SetActive(true);
         player.SetActive(true);
+    }
+
+    // Open Settings
+    public void OnSettingsPressed()
+    {
+        splashScreenCanvas.SetActive(false);
+        settingsCanvas.SetActive(true);
     }
 }
