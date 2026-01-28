@@ -1,5 +1,6 @@
 using UnityEngine;
 using PixelCrushers.DialogueSystem;
+using System.Diagnostics;
 
 public class KarmaEngine : MonoBehaviour
 {
@@ -42,6 +43,11 @@ public class KarmaEngine : MonoBehaviour
         SynchronizeWithDialogueSystem();
     }
 
+    private void Start()
+    {
+        LoadFromPlayerData();
+    }
+
     /// <summary>
     /// Applies a change to the four karma values.
     /// This method will be called from choices or AI text results.
@@ -68,13 +74,16 @@ public class KarmaEngine : MonoBehaviour
 
         if (printKarmaChangesToConsole)
         {
-            Debug.Log("[KarmaEngine] Updated Karma:" +
+            UnityEngine.Debug.Log("[KarmaEngine] Updated Karma:" +
                       " MobLoyalty=" + mobLoyalty +
                       " PoliceLoyalty=" + policeLoyalty +
                       " Mercy=" + mercy +
                       " Ruthlessness=" + ruthlessness +
                       " | Alignment=" + GetAlignmentQuadrant());
         }
+
+        // Save updated values to DataManager
+        WriteToPlayerData();
     }
 
     /// <summary>
@@ -140,5 +149,58 @@ public class KarmaEngine : MonoBehaviour
 
         // Neutral / in-between.
         return "Neutral";
+    }
+
+    /// <summary>
+    /// This saves all karma values to PlayerData.
+    /// This is used for saving karma values outside of single gaming sessions.
+    /// </summary>
+    public void WriteToPlayerData()
+    {
+        DataManager.Instance.playerData.mobLoyalty = mobLoyalty;
+        DataManager.Instance.playerData.policeLoyalty = policeLoyalty;
+        DataManager.Instance.playerData.mercy = mercy;
+        DataManager.Instance.playerData.ruthlessness = ruthlessness;
+
+        DataManager.Instance.SavePlayerData();
+    }
+
+    /// <summary>
+    /// This loads saved karma values from Player Data.
+    /// It allows players to use previously saved karma values over multiple sessions.
+    /// </summary>
+    public void LoadFromPlayerData()
+    {
+        mobLoyalty = DataManager.Instance.playerData.mobLoyalty;
+        policeLoyalty = DataManager.Instance.playerData.policeLoyalty;
+        mercy = DataManager.Instance.playerData.mercy;
+        ruthlessness = DataManager.Instance.playerData.ruthlessness;
+
+        SynchronizeWithDialogueSystem();
+    }
+
+    /// <summary>
+    /// Resets all obtained Karma values.
+    /// This is for when a player wants to start a new game.
+    /// </summary>
+    public void ResetKarma()
+    {
+        mobLoyalty = 0f;
+        policeLoyalty = 0f;
+        mercy = 0f;
+        ruthlessness = 0f;
+
+        SynchronizeWithDialogueSystem();
+
+        // Persist reset to save data
+        if (DataManager.Instance != null && DataManager.Instance.playerData != null)
+        {
+            DataManager.Instance.playerData.mobLoyalty = 0f;
+            DataManager.Instance.playerData.policeLoyalty = 0f;
+            DataManager.Instance.playerData.mercy = 0f;
+            DataManager.Instance.playerData.ruthlessness = 0f;
+
+            DataManager.Instance.SavePlayerData();
+        }
     }
 }
