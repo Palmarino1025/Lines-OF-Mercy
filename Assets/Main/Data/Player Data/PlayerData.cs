@@ -13,6 +13,11 @@ public class PlayerData
     public float mercy;
     public float ruthlessness;
 
+    // Accessibility / UI
+
+    public float textSpeed;
+    public float brightness;
+
     // NPC Relationships
 
     public List<NpcRelationshipData> npcRelationships = new();
