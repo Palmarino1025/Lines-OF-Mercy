@@ -47,6 +47,15 @@ public class NpcInteraction : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        if (interactionPromptObject != null)
+        {
+            interactionPromptObject.SetActive(false);
+            namePlate.SetActive(true);
+        }
+    }
+
     private void OnTriggerEnter(Collider otherCollider)
     {
         if (otherCollider.CompareTag(playerTagName))
@@ -135,7 +144,14 @@ public class NpcInteraction : MonoBehaviour
     }
     private void OnEnable()
     {
-        DialogueManager.instance.conversationEnded += OnConversationEnded;
+        if (DialogueManager.instance != null)
+        {
+            DialogueManager.instance.conversationEnded += OnConversationEnded;
+        }
+        else
+        {
+            Debug.LogWarning("DialogueManager.instance is null in OnEnable");
+        }
     }
 
     private void OnDisable()

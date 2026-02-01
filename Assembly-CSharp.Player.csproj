@@ -87,6 +87,7 @@
     <Compile Include="Assets\Main\Scripts\Core\KarmaDialogueBridge.cs" />
     <Compile Include="Assets\Main\Scripts\AI\AIResultTypes.cs" />
     <Compile Include="Assets\SettingsMenuFunctions.cs" />
+    <Compile Include="Assets\Main\Scripts\UI\GameManager.cs" />
     <Compile Include="Assets\HUDPlayerName.cs" />
     <Compile Include="Assets\Main\Scripts\NPCs\NPCPreferences.cs" />
     <Compile Include="Assets\Main\Data\Player Data\DataManager.cs" />
