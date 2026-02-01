@@ -70,6 +70,7 @@
     <Compile Include="Assets\Main\Scripts\UI\StaminaUI.cs" />
     <Compile Include="Assets\Main\Scripts\AI\HostedInferenceProvider.cs" />
     <Compile Include="Assets\SplashScreenFunctions.cs" />
+    <Compile Include="Assets\Main\Scripts\NPC\UIRotate.cs" />
     <Compile Include="Assets\Main\Scripts\AI\AITypedInputOrchestrator.cs" />
     <Compile Include="Assets\Main\Scripts\Player\DialogueFreezeController.cs" />
     <Compile Include="Assets\PauseMenuFunctions.cs" />

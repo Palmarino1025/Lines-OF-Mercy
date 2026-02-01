@@ -8,6 +8,7 @@ public class NpcInteraction : MonoBehaviour
 
     // reference to the "Press E" world-space canvas
     public GameObject interactionPromptObject;
+    public GameObject namePlate;
 
     // Name of the conversation in the Dialogue Database
     public string conversationTitle = "Test Conversation";
@@ -24,6 +25,7 @@ public class NpcInteraction : MonoBehaviour
         if (interactionPromptObject != null)
         {
             interactionPromptObject.SetActive(false);
+            namePlate.SetActive(true);
         }
     }
 
@@ -66,6 +68,7 @@ public class NpcInteraction : MonoBehaviour
         if (interactionPromptObject != null)
         {
             interactionPromptObject.SetActive(showPrompt);
+            namePlate.SetActive(!showPrompt);
         }
     }
 
