@@ -7,6 +7,7 @@ public class PauseMenuFunctions : MonoBehaviour
     [Header("UI Panels")]
     public GameObject hudCanvas;
     public GameObject pauseCanvas;
+    public GameObject settingsCanvas;
     public GameObject splashScreenCanvas;
 
     // Called when pause button is pressed
@@ -28,5 +29,11 @@ public class PauseMenuFunctions : MonoBehaviour
     {
         splashScreenCanvas.SetActive(true); // Show HUD
         pauseCanvas.SetActive(false); // Hide Pause menu
+    }
+
+    // Open Settings Menu
+    public void OnSettingsPressed()
+    {
+        settingsCanvas.SetActive(true); // Show Settings Canvas
     }
 }
