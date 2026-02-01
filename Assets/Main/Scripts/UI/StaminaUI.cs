@@ -39,8 +39,21 @@ public class StaminaUI : MonoBehaviour
         return currentStamina > 0;
     }
 
+    //current stamina percent (0..1)
+    public float Normalized()
+    {
+        return (maxStamina <= 0f) ? 0f : currentStamina / maxStamina;
+    }
+
+    //optional helper to see if players recovered enough to sprint again
+    public bool HasEnoughToSprint(float requiredPercent)
+    {
+        return Normalized() >= requiredPercent;
+    }
+
     void UpdateUI()
     {
-        staminaFill.fillAmount = currentStamina / maxStamina;
+        if (staminaFill != null)
+            staminaFill.fillAmount = currentStamina / maxStamina;
     }
 }
