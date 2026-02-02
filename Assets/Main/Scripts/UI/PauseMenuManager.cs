@@ -5,6 +5,7 @@ public class PauseMenuManager : MonoBehaviour
 {
     [Tooltip("Name of the pause menu scene to unload when resuming")]
     public string pauseSceneName = "PauseMenu";
+    public GameObject pauseScreen;
 
     public void OnContinuePressed()
     {
@@ -13,5 +14,6 @@ public class PauseMenuManager : MonoBehaviour
 
         // unload the pause menu scene
         SceneManager.UnloadSceneAsync(pauseSceneName);
+        pauseScreen.SetActive(false);
     }
 }
