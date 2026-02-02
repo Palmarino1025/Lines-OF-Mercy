@@ -1,5 +1,9 @@
 using UnityEngine;
 using PixelCrushers.DialogueSystem;  // connect to Dialogue System
+using UnityEngine.EventSystems;      // Used to detect if player is typing in UI (InputField focus)
+using UnityEngine.UI;   // For InputField
+using TMPro;            // For TMP_InputField
+
 
 public class NpcInteraction : MonoBehaviour
 {
@@ -25,7 +29,21 @@ public class NpcInteraction : MonoBehaviour
     // keep a reference to the player who entered the trigger
     private Transform playerTransform;
 
-    private PCCameraController cameraController;
+    // Data-driven Personas
+    // This MUST match the persona JSON "key" in HuggingFace: /data/personas/*.json
+    // Examples: "mob_rico", "cop_holt", "cop_cruz", "cop_briggs", "cop_okabe", "civilian_witness"
+    public string personaKey = "default";
+
+    // Context tag for the AI (scene / conversation context)
+    // This is separate from personaKey and can be used for scene hints like "Interrogation", "Bar", etc.
+    public string aiContextTag = "Default";
+
+    // DSU variable names (so DSU + orchestrator pipeline can read them)
+    public string dsuPersonaKeyVar = "AI_PersonaKey";
+    public string dsuContextTagVar = "AI_ContextTag";
+
+    // If AI orchestrator is in the scene
+    private AITypedInputOrchestrator aiOrchestrator;
 
     private void Start()
     {
@@ -35,10 +53,27 @@ public class NpcInteraction : MonoBehaviour
             interactionPromptObject.SetActive(false);
             namePlate.SetActive(true);
         }
+
+        // Auto-find the orchestrator once (safe if not present in a scene)
+        aiOrchestrator = FindFirstObjectByType<AITypedInputOrchestrator>();
     }
 
     private void Update()
     {
+        // If dialogue is active, do NOT allow starting a new conversation.
+        // This prevents the "typing e in Hello" issue from re-triggering StartConversation.
+        if (IsDialogueActiveSafe())
+        {
+            return;
+        }
+
+        // If the player is focused on UI (typing), do NOT allow E to trigger interactions.
+        // Extra safety even if dialogue state changes later.
+        if (IsPlayerTypingInUI())
+        {
+            return;
+        }
+
         // Only listen for E if the player is inside interaction range
         if (isPlayerInsideInteractionRange && Input.GetKeyDown(KeyCode.E))
         {
@@ -82,6 +117,12 @@ public class NpcInteraction : MonoBehaviour
 
     private void ShowInteractionPrompt(bool showPrompt)
     {
+        // Never show the prompt while dialogue is active
+        if (IsDialogueActiveSafe())
+        {
+            showPrompt = false;
+        }
+
         if (interactionPromptObject != null)
         {
             interactionPromptObject.SetActive(showPrompt);
@@ -94,11 +135,36 @@ public class NpcInteraction : MonoBehaviour
         // Hide the "Press E" prompt while we are talking
         ShowInteractionPrompt(false);
 
-        CacheCameraController();
-
-        if (cameraController != null)
+        // Push personaKey + contextTag into DSU variables
+        // This makes the active NPC persona data-driven
+        if (!string.IsNullOrEmpty(dsuPersonaKeyVar))
         {
-            cameraController.EnableCameraLook(false);
+            DialogueLua.SetVariable(dsuPersonaKeyVar, personaKey);
+        }
+
+        if (!string.IsNullOrEmpty(dsuContextTagVar))
+        {
+            DialogueLua.SetVariable(dsuContextTagVar, aiContextTag);
+        }
+
+        // set the orchestrator contextTag (if it exists)
+        // NOTE: personaKey is NOT stored in the orchestrator in current script set,
+        // but contextTag is, and this still helps pipeline remain consistent.
+        if (aiOrchestrator == null)
+        {
+            aiOrchestrator = FindFirstObjectByType<AITypedInputOrchestrator>();
+        }
+
+        if (aiOrchestrator != null)
+        {
+            aiOrchestrator.contextTag = aiContextTag;
+
+            aiOrchestrator.personaKey = personaKey; // NEW* Set personaKey so HF backend loads the correct /data/personas/<key>.json
+            Debug.Log("NpcInteraction assigned Orchestrator personaKey=" + personaKey + " contextTag=" + aiContextTag); // debug persona
+        }
+        else
+        {
+            Debug.LogWarning("AITypedInputOrchestrator not found in scene."); // debug - default
         }
 
         if (playerTransform != null)
@@ -113,82 +179,68 @@ public class NpcInteraction : MonoBehaviour
         }
     }
 
-    public void ApplyKarma(
-        float mobLoyalty,
-        float policeLoyalty,
-        float mercy,
-        float ruthlessness)
+    // Safely detect whether DSU dialogue is currently active WITHOUT hardcoding
+    // a specific property name (prevents compile issues across DSU versions).
+    private bool IsDialogueActiveSafe()
     {
-        if (KarmaEngine.Instance == null)
+        // Try property: DialogueManager.isConversationActive
+        var type = typeof(DialogueManager);
+
+        var prop1 = type.GetProperty("isConversationActive");
+        if (prop1 != null)
         {
-            Debug.LogError("[NpcInteraction] KarmaEngine not found!");
-            return;
+            object value = prop1.GetValue(null, null);
+            if (value is bool b1) return b1;
         }
 
-        KarmaEngine.Instance.ApplyKarmaDelta(
-            mobLoyalty,
-            policeLoyalty,
-            mercy,
-            ruthlessness
-        );
-
-        Debug.Log("[NpcInteraction] Karma applied from dialogue choice.");
-    }
-
-    private void CacheCameraController()
-    {
-        if (cameraController == null)
+        // Try property: DialogueManager.IsConversationActive
+        var prop2 = type.GetProperty("IsConversationActive");
+        if (prop2 != null)
         {
-            cameraController = FindObjectOfType<PCCameraController>();
+            object value = prop2.GetValue(null, null);
+            if (value is bool b2) return b2;
         }
-    }
-    private void OnEnable()
-    {
-        if (DialogueManager.instance != null)
+
+        // Try field: DialogueManager.isConversationActive
+        var field1 = type.GetField("isConversationActive");
+        if (field1 != null)
         {
-            DialogueManager.instance.conversationEnded += OnConversationEnded;
+            object value = field1.GetValue(null);
+            if (value is bool b3) return b3;
         }
-        else
+
+        // If we can't detect it, assume false so gameplay doesn't lock up.
+        return false;
+    }
+
+    // Detect if the player is currently typing in an input field (not just any UI selection)
+    private bool IsPlayerTypingInUI()
+    {
+        if (EventSystem.current == null)
         {
-            Debug.LogWarning("DialogueManager.instance is null in OnEnable");
+            return false;
         }
-    }
 
-    private void OnDisable()
-    {
-        if (DialogueManager.instance != null)
-            DialogueManager.instance.conversationEnded -= OnConversationEnded;
-    }
+        GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
 
-    private void OnConversationEnded(Transform actor)
-    {
-        CacheCameraController();
-
-        if (cameraController != null)
+        if (selectedObject == null)
         {
-            cameraController.EnableCameraLook(true);
+            return false;
         }
+
+        // Only block world input if the selected UI object is an actual text input field
+        // This prevents needing a mouse click before pressing E.
+        if (selectedObject.GetComponent<UnityEngine.UI.InputField>() != null)
+        {
+            return true;
+        }
+
+        if (selectedObject.GetComponent<TMPro.TMP_InputField>() != null)
+        {
+            return true;
+        }
+
+        return false;
     }
 
-    public void EvaluatePlayerAlignment()
-    {
-        if (DataManager.Instance == null) return;
-
-        var npcData = DataManager.Instance.GetNpcRelationship(npcId);
-
-        float alignmentScore =
-            KarmaEngine.Instance.mobLoyalty * preferenceProfile.mobLoyaltyWeight +
-            KarmaEngine.Instance.policeLoyalty * preferenceProfile.policeLoyaltyWeight +
-            KarmaEngine.Instance.mercy * preferenceProfile.mercyWeight +
-            KarmaEngine.Instance.ruthlessness * preferenceProfile.ruthlessnessWeight;
-
-        npcData.affinity += alignmentScore * 0.1f;
-        npcData.affinity = Mathf.Clamp(npcData.affinity, -100f, 100f);
-
-        DataManager.Instance.SavePlayerData();
-
-        Debug.Log($"[NPC:{npcId}] Alignment reaction: {npcData.affinity}");
-
-        DialogueLua.SetVariable("MobNPC_Alignment", npcData.affinity);
-    }
 }
