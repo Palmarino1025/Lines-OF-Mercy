@@ -11,18 +11,23 @@ public class SplashScreenFunctions : MonoBehaviour
     public GameObject menuButtonGroup;
     public GameObject nameEntryPanel;
     public GameObject hudCanvas;
+    public GameObject settingsCanvas;
+    public GameObject background;
 
     [Header("Name Entry")]
     public TMP_InputField playerNameInput;
     public GameObject splashScreenCanvas;
 
-    [Header("Camera Controls")]
-    public GameObject mainCamera;
+    [Header("Player")]
+    public GameObject player;
 
     // Hide the splash screen when pressed, show name-setting panel
     public void OnNewGamePressed()
     {
+        UnityEngine.Debug.Log("Entered");
+
         menuButtonGroup.SetActive(false);
+        splashScreenCanvas.SetActive(false);
         nameEntryPanel.SetActive(true);
     }
 
@@ -32,16 +37,44 @@ public class SplashScreenFunctions : MonoBehaviour
         string playerName = playerNameInput.text;
 
         if (string.IsNullOrEmpty(playerName))
-        {
-            UnityEngine.Debug.Log("Player name is empty.");
             return;
+
+        // Set the player's name as what they typed and save it
+        DataManager.Instance.SetPlayerName(playerName);
+
+        // Reset Karma for new game
+        if (KarmaEngine.Instance != null)
+        {
+            KarmaEngine.Instance.ResetKarma();
         }
 
-        // Save name somewhere (just printing it for now)
-        UnityEngine.Debug.Log("Player name: " + playerName);
+        // Update the HUD with entered name
+        HUDPlayerName hud = FindObjectOfType<HUDPlayerName>();
+        if (hud != null)
+            hud.UpdatePlayerName();
 
-        // Hide the splash screen, letting the player into the game
+        // Hide the splash screen, activating the player and letting them into the game
         splashScreenCanvas.SetActive(false);
-        mainCamera.SetActive(true);
+        background.SetActive(false);
+        hudCanvas.SetActive(true);
+        nameEntryPanel.SetActive(false);
+        player.SetActive(true);
+    }
+
+    // Continue with all previous save data
+    public void OnLoadPressed()
+    {
+        splashScreenCanvas.SetActive(false);
+        background.SetActive(false);
+        hudCanvas.SetActive(true);
+        player.SetActive(true);
+    }
+
+    // Open Settings
+    public void OnSettingsPressed()
+    {
+        splashScreenCanvas.SetActive(false);
+        background.SetActive(false);
+        settingsCanvas.SetActive(true);
     }
 }

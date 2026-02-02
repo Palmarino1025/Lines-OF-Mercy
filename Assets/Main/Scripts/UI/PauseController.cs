@@ -1,26 +1,23 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseController : MonoBehaviour
 {
-    [Tooltip("Name of the pause menu scene to load")]
-    public string pauseSceneName = "PauseMenu";
+    public GameObject pauseCanvas;
+    private bool isPaused = false;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            OpenPauseMenu();
+            TogglePause();
         }
     }
 
-    
-    public void OpenPauseMenu()
+    void TogglePause()
     {
-        // stop the game
-        Time.timeScale = 0f;
+        isPaused = !isPaused;
 
-        // load pause menu additively
-        SceneManager.LoadScene(pauseSceneName, LoadSceneMode.Additive);
+        pauseCanvas.SetActive(isPaused);
+        Time.timeScale = isPaused ? 0f : 1f;
     }
 }
