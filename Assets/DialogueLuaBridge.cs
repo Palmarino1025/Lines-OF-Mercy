@@ -47,6 +47,6 @@ public class DialogueLuaBridge : MonoBehaviour
             return;
         }
 
-        npc.EvaluatePlayerAlignment();
+        //npc.EvaluatePlayerAlignment();
     }
 }

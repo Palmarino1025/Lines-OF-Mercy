@@ -82,21 +82,13 @@ public class NpcInteraction : MonoBehaviour
         }
     }
 
-    void LateUpdate()
-    {
-        if (interactionPromptObject != null)
-        {
-            interactionPromptObject.SetActive(false);
-            namePlate.SetActive(true);
-        }
-    }
-
     private void OnTriggerEnter(Collider otherCollider)
     {
         if (otherCollider.CompareTag(playerTagName))
         {
             isPlayerInsideInteractionRange = true;
             playerTransform = otherCollider.transform;
+            namePlate.SetActive(false);
 
             Debug.Log("NpcInteraction: Player entered interaction range.");
             ShowInteractionPrompt(true);
@@ -109,6 +101,7 @@ public class NpcInteraction : MonoBehaviour
         {
             isPlayerInsideInteractionRange = false;
             playerTransform = null;
+            namePlate.SetActive(true);
 
             Debug.Log("NpcInteraction: Player left interaction range.");
             ShowInteractionPrompt(false);
@@ -126,7 +119,6 @@ public class NpcInteraction : MonoBehaviour
         if (interactionPromptObject != null)
         {
             interactionPromptObject.SetActive(showPrompt);
-            namePlate.SetActive(!showPrompt);
         }
     }
 

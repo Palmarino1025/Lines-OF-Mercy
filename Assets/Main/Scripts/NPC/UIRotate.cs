@@ -22,11 +22,6 @@ public class UIRotate : MonoBehaviour
         {
             mainCam = Camera.main; // Automatically finds the scene's main camera by tag
         }
-
-        if (mainCam == null)
-        {
-            Debug.LogWarning("UIRotate: No main camera found in the scene.");
-        }
         // Make the nameplate rotate to always face the camera
         if (mainCam != null)
         {
