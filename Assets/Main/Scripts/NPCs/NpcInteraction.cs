@@ -179,6 +179,18 @@ public class NpcInteraction : MonoBehaviour
         }
     }
 
+    //private void OnEnable()
+    //{
+    //    if (DialogueManager.instance != null)
+    //    {
+    //        DialogueManager.instance.conversationEnded += OnConversationEnded;
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("DialogueManager.instance is null in OnEnable");
+    //    }
+    //}
+
     // Safely detect whether DSU dialogue is currently active WITHOUT hardcoding
     // a specific property name (prevents compile issues across DSU versions).
     private bool IsDialogueActiveSafe()
