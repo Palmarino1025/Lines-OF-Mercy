@@ -61,10 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Main\Scripts\UI\PauseMenuManager.cs" />
-    <Compile Include="Assets\Main\Data\Player Data\PlayerData.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PCCameraController.cs" />
     <Compile Include="Assets\Main\Scripts\NPCs\NpcInteraction.cs" />
     <Compile Include="Assets\Main\Scripts\UI\SplashLoader.cs" />
+    <Compile Include="Assets\Main\Scripts\NPC\NPCRelationshipData.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\BrightnessSettings.cs" />
     <Compile Include="Assets\Main\Scripts\Core\KarmaEngine.cs" />
@@ -74,6 +74,7 @@
     <Compile Include="Assets\Main\Scripts\AI\HostedInferenceProvider.cs" />
     <Compile Include="Assets\SplashScreenFunctions.cs" />
     <Compile Include="Assets\Main\Scripts\NPC\UIRotate.cs" />
+    <Compile Include="Assets\Main\Scripts\Player\PlayerData.cs" />
     <Compile Include="Assets\Main\Scripts\AI\AITypedInputOrchestrator.cs" />
     <Compile Include="Assets\Main\Scripts\Player\DialogueFreezeController.cs" />
     <Compile Include="Assets\PauseMenuFunctions.cs" />
@@ -81,6 +82,8 @@
     <Compile Include="Assets\Main\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Main\Scripts\UI\MicIndicator.cs" />
     <Compile Include="Assets\Main\Scripts\AI\AITypedKarmaMapper.cs" />
+    <Compile Include="Assets\Main\Scripts\UI\HUDVisibilityController.cs" />
+    <Compile Include="Assets\Main\Scripts\Player\DataManager.cs" />
     <Compile Include="Assets\Main\Scripts\Dialogue\TypedResponseUI.cs" />
     <Compile Include="Assets\DialogueLuaBridge.cs" />
     <Compile Include="Assets\Main\Scripts\UI\KarmaHUD.cs" />
@@ -90,8 +93,6 @@
     <Compile Include="Assets\Main\Scripts\UI\GameManager.cs" />
     <Compile Include="Assets\HUDPlayerName.cs" />
     <Compile Include="Assets\Main\Scripts\NPCs\NPCPreferences.cs" />
-    <Compile Include="Assets\Main\Data\Player Data\DataManager.cs" />
-    <Compile Include="Assets\Main\Data\NPCRelationshipData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

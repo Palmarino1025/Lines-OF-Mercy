@@ -2290,6 +2290,8 @@ GameObject:
   - component: {fileID: 120129589}
   - component: {fileID: 120129591}
   - component: {fileID: 120129590}
+  - component: {fileID: 120129593}
+  - component: {fileID: 120129592}
   m_Layer: 5
   m_Name: HUDCanvas
   m_TagString: Untagged
@@ -2423,6 +2425,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 0}
+--- !u!114 &120129592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120129584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c0dcc7f471f054bb8fe2fd4466b139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hudCanvasGroup: {fileID: 0}
+--- !u!225 &120129593
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120129584}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &125044051
 GameObject:
   m_ObjectHideFlags: 0
@@ -43148,7 +43175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2147416605
 RectTransform:
   m_ObjectHideFlags: 0
