@@ -1423,7 +1423,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: 'So you said: [var=playerTypedText]'
+        value: "[var=AI_NPC_Line]\r"
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -1511,8 +1511,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.6099999
+    canvasScrollPosition: {x: 77.80728, y: 75.911835}
+    canvasZoom: 0.84999967
   - id: 2
     fields:
     - title: Title
