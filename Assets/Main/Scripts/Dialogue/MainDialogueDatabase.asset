@@ -1380,13 +1380,13 @@ MonoBehaviour:
       - originConversationID: 1
         originDialogueID: 13
         destinationConversationID: 1
-        destinationDialogueID: 14
+        destinationDialogueID: 16
         isConnector: 0
         priority: 2
       - originConversationID: 1
         originDialogueID: 13
         destinationConversationID: 1
-        destinationDialogueID: 16
+        destinationDialogueID: 14
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -1396,8 +1396,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1021.2449
-        y: 323.95987
+        x: 981.80835
+        y: 357.76266
         width: 160
         height: 30
     - id: 14
@@ -1437,13 +1437,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 1
-        originDialogueID: 14
-        destinationConversationID: 1
-        destinationDialogueID: 17
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: "Variable[\"playerTypedText\"] ~= \"\"\r"
       userScript: 
       onExecute:
@@ -1451,8 +1445,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1031.186
-        y: 445.32462
+        x: 1000.9043
+        y: 491.09924
         width: 160
         height: 30
     - id: 16
@@ -1506,13 +1500,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1259.0502
-        y: 287.37445
+        x: 1253.4164
+        y: 295.82513
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 77.80728, y: 75.911835}
-    canvasZoom: 0.84999967
+    canvasScrollPosition: {x: 754.6172, y: 212.57965}
+    canvasZoom: 1.4199991
   - id: 2
     fields:
     - title: Title
