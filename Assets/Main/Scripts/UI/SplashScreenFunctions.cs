@@ -12,8 +12,8 @@ public class SplashScreenFunctions : MonoBehaviour
     public GameObject nameEntryPanel;
     public GameObject hudCanvas;
     public GameObject settingsCanvas;
-    public GameObject background;
     public GameObject brightnessOverlay;
+    public GameObject background;
 
     [Header("Name Entry")]
     public TMP_InputField playerNameInput;
@@ -56,10 +56,9 @@ public class SplashScreenFunctions : MonoBehaviour
 
         // Hide the splash screen, activating the player and letting them into the game
         splashScreenCanvas.SetActive(false);
-        background.SetActive(false);
         hudCanvas.SetActive(true);
-        nameEntryPanel.SetActive(false);
         player.SetActive(true);
+        nameEntryPanel.SetActive(false);
         brightnessOverlay.SetActive(true);
     }
 
