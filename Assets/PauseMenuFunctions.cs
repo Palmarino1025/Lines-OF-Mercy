@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseMenuFunctions : MonoBehaviour
@@ -13,27 +11,41 @@ public class PauseMenuFunctions : MonoBehaviour
     // Called when pause button is pressed
     public void OnPausePressed()
     {
-        hudCanvas.SetActive(false); // Hide HUD
-        pauseCanvas.SetActive(true); // Show Pause menu
+        if (hudCanvas != null) hudCanvas.SetActive(false);
+        if (pauseCanvas != null) pauseCanvas.SetActive(true);
+        if (settingsCanvas != null) settingsCanvas.SetActive(false);
+        Time.timeScale = 0f;  // Pause the game
     }
 
     // Called when continue button is pressed
     public void OnResumePressed()
     {
-        hudCanvas.SetActive(true); // Show HUD
-        pauseCanvas.SetActive(false); // Hide Pause menu
+        Time.timeScale = 1f;  // Resume game time
+        if (pauseCanvas != null)
+            pauseCanvas.SetActive(false);  // Hide pause menu
     }
 
     // Called when Save and Exit is pressed
     public void OnSaveExitPressed()
     {
-        splashScreenCanvas.SetActive(true); // Show HUD
-        pauseCanvas.SetActive(false); // Hide Pause menu
+        if (splashScreenCanvas != null) splashScreenCanvas.SetActive(true);
+        if (pauseCanvas != null) pauseCanvas.SetActive(false);
+        if (settingsCanvas != null) settingsCanvas.SetActive(false);
+        Time.timeScale = 1f;  // Resume time or transition accordingly
+        // Add your saving logic here!
     }
 
-    // Open Settings Menu
+    // Open Settings Menu from Pause Menu
     public void OnSettingsPressed()
     {
-        settingsCanvas.SetActive(true); // Show Settings Canvas
+        if (settingsCanvas != null) settingsCanvas.SetActive(true);
+        if (pauseCanvas != null) pauseCanvas.SetActive(false);
+    }
+
+    // Called to close settings and go back to Pause Menu
+    public void OnSettingsBackPressed()
+    {
+        if (settingsCanvas != null) settingsCanvas.SetActive(false);
+        if (pauseCanvas != null) pauseCanvas.SetActive(true);
     }
 }

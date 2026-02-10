@@ -21,13 +21,15 @@ public class HostedInferenceProvider : MonoBehaviour, IAIProvider
     // Timeout in seconds (keep under Hugging Face limits)
     public float timeoutSeconds = 4.5f;
 
-    
+
     // Payload sent to the AI backend.
     [Serializable]
     private class RequestPayload
     {
         public string text;        // Player's typed input
         public string contextTag;  // NPC / scene / conversation context
+        // persona key used by Hugging Face backend to load /data/personas/<key>.json
+        public string personaKey;  // Example: "mob_rico", "cop_holt", "civilian_witness"
     }
 
 
@@ -35,6 +37,7 @@ public class HostedInferenceProvider : MonoBehaviour, IAIProvider
     public IEnumerator AnalyzeTypedInput(
         string playerText,
         string contextTag,
+        string personaKey,
         Action<AIAnalysisResult> onDone
     )
     {
@@ -56,11 +59,18 @@ public class HostedInferenceProvider : MonoBehaviour, IAIProvider
 
         // Log endpoint for debugging connectivity issues
         Debug.Log("[HostedInferenceProvider] Sending request to: " + endpointUrl);
+        
+        // safe fallback so we never send null/empty persona keys
+        if (string.IsNullOrEmpty(personaKey))
+        {
+            personaKey = "default";
+        }
 
         // Build request payload
         RequestPayload payload = new RequestPayload();
         payload.text = playerText;
         payload.contextTag = contextTag;
+        payload.personaKey = personaKey;
 
         // Convert payload to JSON
         string jsonBody = JsonUtility.ToJson(payload);
@@ -101,6 +111,7 @@ public class HostedInferenceProvider : MonoBehaviour, IAIProvider
 
             // Read response JSON
             string responseJson = request.downloadHandler.text;
+            Debug.Log("Request body: " + jsonBody); // what Unity is sending
 
             // Parse response
             AIAnalysisResult parsedResult = null;

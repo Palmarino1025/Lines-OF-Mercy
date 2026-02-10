@@ -2,5 +2,5 @@ using System.Collections;
 
 public interface IAIProvider
 {
-    IEnumerator AnalyzeTypedInput(string playerText, string contextTag, System.Action<AIAnalysisResult> onDone);
+    IEnumerator AnalyzeTypedInput(string playerText, string contextTag, string personaKey, System.Action<AIAnalysisResult> onDone);
 }
