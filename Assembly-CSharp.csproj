@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Main\Scripts\UI\PauseMenuManager.cs" />
+    <Compile Include="Assets\Main\Scripts\Core\GameSystemsRoot.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PCCameraController.cs" />
     <Compile Include="Assets\Main\Scripts\NPCs\NpcInteraction.cs" />
     <Compile Include="Assets\Main\Scripts\UI\SplashLoader.cs" />

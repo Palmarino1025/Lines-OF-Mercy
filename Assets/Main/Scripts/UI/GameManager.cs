@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject); // Keeps this alive across scene loads
+     //   Instance = this;
+     //   DontDestroyOnLoad(gameObject); // Keeps this alive across scene loads
     }
 
     private void Update()
