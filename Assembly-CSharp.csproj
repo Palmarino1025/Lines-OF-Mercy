@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Main\Scripts\UI\PauseMenuManager.cs" />
     <Compile Include="Assets\Main\Scripts\Core\GameSystemsRoot.cs" />
+    <Compile Include="Assets\NightClub\Scripts\RotatingDiscoLight.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PCCameraController.cs" />
     <Compile Include="Assets\Main\Scripts\NPCs\NpcInteraction.cs" />
     <Compile Include="Assets\Main\Scripts\UI\SplashLoader.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Main\Scripts\AI\AITypedInputOrchestrator.cs" />
     <Compile Include="Assets\Main\Scripts\Player\DialogueFreezeController.cs" />
     <Compile Include="Assets\PauseMenuFunctions.cs" />
+    <Compile Include="Assets\NightClub\Scripts\MultiColorLight.cs" />
     <Compile Include="Assets\Main\Scripts\AI\IAIProvider.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Main\Scripts\UI\MicIndicator.cs" />
@@ -110,6 +112,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\NightClub\Documentation.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\POLYGON city pack\Read_me.txt" />
