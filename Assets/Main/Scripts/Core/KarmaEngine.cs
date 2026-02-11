@@ -33,7 +33,7 @@ public class KarmaEngine : MonoBehaviour
             return;
         }
 
-        //Instance = this;
+        Instance = this;
 
         // keep this object between scenes.
         //DontDestroyOnLoad(this.gameObject);
