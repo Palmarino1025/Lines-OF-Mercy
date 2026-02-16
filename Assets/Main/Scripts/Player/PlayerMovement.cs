@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 1.5f;
     public KeyCode jumpKey = KeyCode.Space;
 
-    private CharacterController controller;
-    private bool isMovementLocked = false;
+    public CharacterController controller;
+    public bool isMovementLocked = false;
 
     //------------------
     // Exposed State for UI

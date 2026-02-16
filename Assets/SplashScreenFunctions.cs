@@ -21,6 +21,7 @@ public class SplashScreenFunctions : MonoBehaviour
     [Header("Player")]
     public GameObject player;
 
+
     // Hide the splash screen when pressed, show name-setting panel
     public void OnNewGamePressed()
     {
@@ -53,6 +54,8 @@ public class SplashScreenFunctions : MonoBehaviour
         if (hud != null)
             hud.UpdatePlayerName();
 
+        player.GetComponent<PlayerMovement>().SetMovementLock(false);
+
         // Hide the splash screen, activating the player and letting them into the game
         splashScreenCanvas.SetActive(false);
         background.SetActive(false);
@@ -64,6 +67,7 @@ public class SplashScreenFunctions : MonoBehaviour
     // Continue with all previous save data
     public void OnLoadPressed()
     {
+        player.GetComponent<PlayerMovement>().SetMovementLock(false);
         splashScreenCanvas.SetActive(false);
         background.SetActive(false);
         hudCanvas.SetActive(true);
