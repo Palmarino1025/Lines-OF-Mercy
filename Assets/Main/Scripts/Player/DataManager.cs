@@ -4,11 +4,15 @@ using UnityEngine;
 using System.IO;
 using static System.Net.Mime.MediaTypeNames;
 
+
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public PlayerData playerData;
     private string savePath;
+
+    [Header("Testing")]
+    public bool disableSaveLoad = false;
 
     void Awake()
     {
