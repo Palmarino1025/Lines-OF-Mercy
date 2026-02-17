@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1f;   // Force unpaused on scene load
+        isPaused = false;      // Reset pause state
         // Singleton pattern: only one GameManager allowed
         if (Instance != null && Instance != this)
         {
