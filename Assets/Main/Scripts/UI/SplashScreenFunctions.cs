@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Diagnostics;
 using System.Security.Permissions;
+using static System.Net.Mime.MediaTypeNames;
 
 public class SplashScreenFunctions : MonoBehaviour
 {
@@ -27,7 +28,6 @@ public class SplashScreenFunctions : MonoBehaviour
     {
         UnityEngine.Debug.Log("Entered");
 
-        menuButtonGroup.SetActive(false);
         splashScreenCanvas.SetActive(false);
         nameEntryPanel.SetActive(true);
     }
@@ -55,11 +55,14 @@ public class SplashScreenFunctions : MonoBehaviour
             hud.UpdatePlayerName();
 
         // Hide the splash screen, activating the player and letting them into the game
-        splashScreenCanvas.SetActive(false);
         hudCanvas.SetActive(true);
         player.SetActive(true);
         nameEntryPanel.SetActive(false);
         brightnessOverlay.SetActive(true);
+
+        // Mandatory SettingsCanvas Load so that brightness kicks in
+        settingsCanvas.SetActive(true);
+        settingsCanvas.SetActive(false);
     }
 
     // Continue with all previous save data
@@ -70,6 +73,10 @@ public class SplashScreenFunctions : MonoBehaviour
         hudCanvas.SetActive(true);
         player.SetActive(true);
         brightnessOverlay.SetActive(true);
+
+        // Mandatory SettingsCanvas Load so that brightness kicks in
+        settingsCanvas.SetActive(true);
+        settingsCanvas.SetActive(false);
     }
 
     // Open Settings
@@ -79,5 +86,11 @@ public class SplashScreenFunctions : MonoBehaviour
         background.SetActive(false);
         settingsCanvas.SetActive(true);
         brightnessOverlay.SetActive(true);
+    }
+
+    public void ExitGame()
+    {
+        UnityEngine.Debug.Log("Exiting game...");
+        UnityEngine.Application.Quit();
     }
 }

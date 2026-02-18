@@ -7,7 +7,7 @@ public class SettingsMenuFunctions : MonoBehaviour
     [Header("UI Panels")]
     public GameObject settingsCanvas;
     public GameObject splashScreenCanvas;
-    public GameObject brightnessOverlay;
+    public GameObject background;
 
     public void OpenSettings()
     {
@@ -19,6 +19,6 @@ public class SettingsMenuFunctions : MonoBehaviour
     {
         settingsCanvas.SetActive(false);
         splashScreenCanvas.SetActive(true);
-        brightnessOverlay.SetActive(false);
+        background.SetActive(true);
     }
 }

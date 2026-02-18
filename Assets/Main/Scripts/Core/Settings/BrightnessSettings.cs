@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Only loads after SettingsCanvas is loaded.Needs to be fixed.
+
 public class BrightnessSettings : MonoBehaviour
 {
     [Header("References")]

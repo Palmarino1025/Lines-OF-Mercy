@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Pause Menu")]
     public GameObject pauseCanvas;
+    public GameObject player;
+    public GameObject hudCanvas;
 
     private bool isPaused = false;
 
@@ -52,6 +54,8 @@ public class GameManager : MonoBehaviour
         else
             Debug.LogWarning("Pause Canvas is not assigned in GameManager!");
         // Optional: mute audio, stop player input, etc.
+        player.SetActive(false);
+        hudCanvas.SetActive(false);
     }
 
     private void ResumeGame()
@@ -60,6 +64,8 @@ public class GameManager : MonoBehaviour
         if (pauseCanvas != null)
             pauseCanvas.SetActive(false);
         // Optional: unmute audio, enable player input, etc.
+        player.SetActive(true);
+        hudCanvas.SetActive(true);
     }
 
     // Optional: method to quit the game
