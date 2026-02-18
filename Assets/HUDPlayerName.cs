@@ -1,36 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Diagnostics;
 
 public class HUDPlayerName : MonoBehaviour
 {
-    public TMP_Text playerNameText;
+    [SerializeField] private TMP_Text playerNameText;
+    [SerializeField] private string defaultName = "Your character";
 
-    void Start()
-    {
-        UpdatePlayerName();
-    }
-
-    public void UpdatePlayerName()
+    private void OnEnable()
     {
         if (DataManager.Instance == null)
         {
-            UnityEngine.Debug.LogWarning("DataManager not found.");
+            Debug.LogWarning("DataManager not found.");
             return;
         }
 
-        string playerName = DataManager.Instance.GetPlayerName();
+        // Subscribe to changes
+        DataManager.Instance.OnPlayerNameChanged += UpdatePlayerName;
 
-        if (string.IsNullOrEmpty(playerName))
-        {
-            playerNameText.text = "Your character";
-        }
+        // Initial update (important if name already exists)
+        UpdatePlayerName(DataManager.Instance.GetPlayerName());
+    }
 
-        else
-        {
-            playerNameText.text = playerName;
-        }
+    private void OnDisable()
+    {
+        if (DataManager.Instance != null)
+            DataManager.Instance.OnPlayerNameChanged -= UpdatePlayerName;
+    }
+
+    public void UpdatePlayerName(string name)
+    {
+        playerNameText.text = string.IsNullOrWhiteSpace(name)
+            ? defaultName
+            : name;
     }
 }
