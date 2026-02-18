@@ -6019,7 +6019,6 @@ GameObject:
   - component: {fileID: 2316429637928697163}
   - component: {fileID: 5226043950540778815}
   - component: {fileID: 5207700009628732599}
-  - component: {fileID: 5717730171000491914}
   - component: {fileID: 1665935371771444356}
   - component: {fileID: 7009358334812656953}
   m_Layer: 5
@@ -6130,19 +6129,6 @@ MonoBehaviour:
   settingsCanvas: {fileID: 0}
   splashScreenCanvas: {fileID: 3207696254209103966}
 --- !u!114 &5207700009628732599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6919094353851073681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4aa4e3d8d7a1f4a8e016528aedd51e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNameText: {fileID: 0}
---- !u!114 &5717730171000491914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7967,7 +7953,7 @@ PrefabInstance:
     - target: {fileID: 8588729725544076138, guid: b5c2dd91c47213548afc07b97fd5efcf,
         type: 3}
       propertyPath: m_Text
-      value: Input Field
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8588729725547714828, guid: b5c2dd91c47213548afc07b97fd5efcf,
         type: 3}
