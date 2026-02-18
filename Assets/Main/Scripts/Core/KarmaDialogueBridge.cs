@@ -16,8 +16,8 @@ public class KarmaDialogueBridge : MonoBehaviour
             return;
         }
 
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
+     //   Instance = this;
+     //   DontDestroyOnLoad(this.gameObject);
     }
 
     private void OnEnable()

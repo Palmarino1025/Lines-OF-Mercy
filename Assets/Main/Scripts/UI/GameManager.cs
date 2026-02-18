@@ -11,14 +11,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1f;   // Force unpaused on scene load
+        isPaused = false;      // Reset pause state
         // Singleton pattern: only one GameManager allowed
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject); // Keeps this alive across scene loads
+     //   Instance = this;
+     //   DontDestroyOnLoad(gameObject); // Keeps this alive across scene loads
     }
 
     private void Update()
