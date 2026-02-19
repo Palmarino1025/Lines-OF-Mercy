@@ -138,12 +138,6 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(playerVelocity * Time.deltaTime);
 
-        if (Time.frameCount % 30 == 0)
-        {
-            Vector3 positionAfterMove = transform.position;
-            Debug.Log("POS before=" + positionBeforeMove + " after=" + positionAfterMove);
-        }
-
     }
 
     public void SetMovementLock(bool state)

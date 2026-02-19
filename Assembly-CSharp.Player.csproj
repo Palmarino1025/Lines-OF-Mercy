@@ -98,6 +98,7 @@
     <Compile Include="Assets\SettingsMenuFunctions.cs" />
     <Compile Include="Assets\Main\Scripts\UI\GameManager.cs" />
     <Compile Include="Assets\HUDPlayerName.cs" />
+    <Compile Include="Assets\Main\Scripts\Player\MinimapFollow.cs" />
     <Compile Include="Assets\Main\Scripts\NPCs\NPCPreferences.cs" />
   </ItemGroup>
   <ItemGroup>
