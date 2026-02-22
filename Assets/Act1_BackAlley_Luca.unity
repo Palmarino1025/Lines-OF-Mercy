@@ -5704,6 +5704,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8777845291362846163, guid: e7da901450a8856409b7152d05af310f,
+        type: 3}
+      propertyPath: aiContextTag
+      value: BackAlley_Luca_Confrontation
+      objectReference: {fileID: 0}
+    - target: {fileID: 8777845291362846163, guid: e7da901450a8856409b7152d05af310f,
+        type: 3}
+      propertyPath: conversationTitle
+      value: Act1_BackAlley_Luca
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
