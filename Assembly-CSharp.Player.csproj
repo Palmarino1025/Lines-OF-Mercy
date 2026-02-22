@@ -74,7 +74,6 @@
     <Compile Include="Assets\Main\Scripts\Core\KarmaEngine.cs" />
     <Compile Include="Assets\Main\Scripts\Dialogue\TypedInputReset.cs" />
     <Compile Include="Assets\Main\Scripts\Core\HUDMissionText.cs" />
-    <Compile Include="Assets\Main\Scripts\UI\PauseController.cs" />
     <Compile Include="Assets\Main\Scripts\UI\StaminaUI.cs" />
     <Compile Include="Assets\Main\Scripts\AI\HostedInferenceProvider.cs" />
     <Compile Include="Assets\SplashScreenFunctions.cs" />
@@ -82,7 +81,6 @@
     <Compile Include="Assets\Main\Scripts\Player\PlayerData.cs" />
     <Compile Include="Assets\Main\Scripts\AI\AITypedInputOrchestrator.cs" />
     <Compile Include="Assets\Main\Scripts\Player\DialogueFreezeController.cs" />
-    <Compile Include="Assets\PauseMenuFunctions.cs" />
     <Compile Include="Assets\NightClub\Scripts\MultiColorLight.cs" />
     <Compile Include="Assets\Main\Scripts\AI\IAIProvider.cs" />
     <Compile Include="Assets\Main\Scripts\Player\PlayerMovement.cs" />
@@ -98,6 +96,7 @@
     <Compile Include="Assets\SettingsMenuFunctions.cs" />
     <Compile Include="Assets\Main\Scripts\UI\GameManager.cs" />
     <Compile Include="Assets\HUDPlayerName.cs" />
+    <Compile Include="Assets\Main\Scripts\Player\MinimapFollow.cs" />
     <Compile Include="Assets\Main\Scripts\NPCs\NPCPreferences.cs" />
   </ItemGroup>
   <ItemGroup>
