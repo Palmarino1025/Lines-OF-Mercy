@@ -16,7 +16,7 @@ public class KarmaDialogueBridge : MonoBehaviour
             return;
         }
 
-     //   Instance = this;
+        Instance = this;
      //   DontDestroyOnLoad(this.gameObject);
     }
 
@@ -34,12 +34,21 @@ public class KarmaDialogueBridge : MonoBehaviour
 
         Lua.RegisterFunction("AddKarma", this, methodInfo);
         // Now you can call AddKarma(...) from DSU Lua scripts.
+
+        MethodInfo branchInfo = typeof(KarmaDialogueBridge).GetMethod("SetNextBranch",
+        BindingFlags.Public | BindingFlags.Instance);
+
+        if (branchInfo != null)
+        {
+            Lua.RegisterFunction("SetNextBranch", this, branchInfo);
+        }
     }
 
     private void OnDisable()
     {
         // Clean up when the object is disabled.
         Lua.UnregisterFunction("AddKarma");
+        Lua.UnregisterFunction("SetNextBranch");
     }
 
     /// <summary>
@@ -65,5 +74,16 @@ public class KarmaDialogueBridge : MonoBehaviour
             (float)mercyChange,
             (float)ruthlessnessChange
         );
+    }
+
+    public void SetNextBranch(string branch)
+    {
+        // Update DSU variable immediately
+        DialogueLua.SetVariable("NextBranch", branch);
+
+        // Also signal that AI is ready for branching
+        DialogueLua.SetVariable("AI_Ready", true);
+
+        Debug.Log("[KarmaDialogueBridge] NextBranch set to: " + branch);
     }
 }

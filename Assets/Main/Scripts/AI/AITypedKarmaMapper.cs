@@ -40,10 +40,10 @@ public class AITypedKarmaMapper : MonoBehaviour
         Debug.Log($"[AITypedKarmaMapper] AI → Tone={result.tone}, Intent={result.intent}, Target={result.target}, Confidence={result.confidence}");
 
         // Base deltas (NOT total stats — just changes)
-        float mobDelta = 0f;
-        float policeDelta = 0f;
-        float mercyDelta = 0f;
-        float ruthDelta = 0f;
+        double mobDelta = 0f;
+        double policeDelta = 0f;
+        double mercyDelta = 0f;
+        double ruthDelta = 0f;
 
         // -------------------------
         // 1️⃣ Tone (Primary Driver)
@@ -113,7 +113,7 @@ public class AITypedKarmaMapper : MonoBehaviour
         // -------------------------
         // 4️⃣ Confidence Scaling
         // -------------------------
-        float confidenceMultiplier = Mathf.Clamp01(result.confidence);
+        double confidenceMultiplier = Mathf.Clamp01(result.confidence);
 
         mobDelta *= confidenceMultiplier;
         policeDelta *= confidenceMultiplier;
@@ -128,6 +128,6 @@ public class AITypedKarmaMapper : MonoBehaviour
         // -------------------------
         // 5️⃣ Apply
         // -------------------------
-        KarmaEngine.Instance.ApplyKarmaDelta(mobDelta, policeDelta, mercyDelta, ruthDelta);
+        KarmaEngine.Instance.ApplyKarmaDelta((float)mobDelta, (float)policeDelta, (float)mercyDelta, (float)ruthDelta);
     }
 };

@@ -30,7 +30,7 @@ public class AITypedInputOrchestrator : MonoBehaviour
                                           // persona key to select JSON persona on the Hugging Face backend
     public string personaKey = "default"; // ex: "mob_rico", "cop_holt"
 
-    DialogueDirection branch = DialogueDirection.Neutral;
+    public DialogueDirection branch = DialogueDirection.Neutral;
 
     private void Awake()
     {
@@ -122,6 +122,7 @@ public class AITypedInputOrchestrator : MonoBehaviour
         DialogueLua.SetVariable(dsuPlayerTextVar, playerText);
 
         AIAnalysisResult result = null;
+        DialogueLua.SetVariable("AI_Ready", false);
 
         yield return aiProvider.AnalyzeTypedInput(playerText, contextTag, personaKey, (r) =>
         {
@@ -159,7 +160,9 @@ public class AITypedInputOrchestrator : MonoBehaviour
         branch = MapIntentToBranch(result.intent);
 
         // Set DSU variable for branching
-        DialogueLua.SetVariable("NextBranch", branch.ToString());
+        KarmaDialogueBridge.Instance.SetNextBranch(branch.ToString());
+        DialogueLua.SetVariable("AI_Ready", true);
+        // Manually continue conversation
         Debug.Log("[AIBranch] Player typed response → Branch: " + branch);
     }
 }
