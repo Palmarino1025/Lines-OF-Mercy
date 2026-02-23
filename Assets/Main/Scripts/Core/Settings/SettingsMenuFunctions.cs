@@ -7,6 +7,7 @@ public class SettingsMenuFunctions : MonoBehaviour
     [Header("UI Panels")]
     public GameObject settingsCanvas;
     public GameObject splashScreenCanvas;
+    public GameObject background;
 
     public void OpenSettings()
     {
@@ -18,5 +19,6 @@ public class SettingsMenuFunctions : MonoBehaviour
     {
         settingsCanvas.SetActive(false);
         splashScreenCanvas.SetActive(true);
+        background.SetActive(true);
     }
 }
