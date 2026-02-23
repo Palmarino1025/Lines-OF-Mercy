@@ -126,7 +126,6 @@ public class PlayerMovement : MonoBehaviour
             if (sprintKeyHeld)
                 currentSpeed *= sprintMultiplier;
         }
-        Vector3 positionBeforeMove = transform.position;
 
         if (!isMovementLocked)
             controller.Move(move * currentSpeed * Time.deltaTime);
@@ -137,6 +136,7 @@ public class PlayerMovement : MonoBehaviour
         playerVelocity.y += gravity * gravityScale * Time.deltaTime;
 
         controller.Move(playerVelocity * Time.deltaTime);
+
 
     }
 
