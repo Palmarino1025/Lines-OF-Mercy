@@ -40,29 +40,22 @@ public class SplashScreenFunctions : MonoBehaviour
         if (string.IsNullOrEmpty(playerName))
             return;
 
-        // Set the player's name as what they typed and save it
         DataManager.Instance.SetPlayerName(playerName);
 
-        // Reset Karma for new game
         if (KarmaEngine.Instance != null)
         {
             KarmaEngine.Instance.ResetKarma();
         }
 
-        // Update the HUD with entered name
-        HUDPlayerName hud = FindObjectOfType<HUDPlayerName>();
-        if (hud != null)
-            hud.UpdatePlayerName();
-
         player.GetComponent<PlayerMovement>().SetMovementLock(false);
 
-        // Hide the splash screen, activating the player and letting them into the game
         splashScreenCanvas.SetActive(false);
         background.SetActive(false);
         hudCanvas.SetActive(true);
         nameEntryPanel.SetActive(false);
         player.SetActive(true);
     }
+
 
     // Continue with all previous save data
     public void OnLoadPressed()

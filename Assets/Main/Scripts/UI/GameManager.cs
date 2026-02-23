@@ -1,73 +1,121 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [Header("Pause Menu")]
-    public GameObject pauseCanvas;
+    [Header("UI Panels")]
+    public GameObject pauseScreen;      // The pause menu canvas
+    private CanvasGroup pauseCanvasGroup;
+
+    [Header("Gameplay Scripts")]
+    public MonoBehaviour[] scriptsToPause; // Assign in Inspector any scripts you want paused (enemy AI, combat, etc.)
+    public MonoBehaviour playerMovementScript; // Your player movement script (never pause this)
 
     private bool isPaused = false;
 
-    private void Awake()
+    void Awake()
     {
-        Time.timeScale = 1f;   // Force unpaused on scene load
-        isPaused = false;      // Reset pause state
-        // Singleton pattern: only one GameManager allowed
+        // Setup singleton
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-     //   Instance = this;
-     //   DontDestroyOnLoad(gameObject); // Keeps this alive across scene loads
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        Time.timeScale = 1f;
+        if (pauseScreen != null)
+        {
+            pauseCanvasGroup = pauseScreen.GetComponent<CanvasGroup>();
+            if (pauseCanvasGroup == null)
+            {
+                pauseCanvasGroup = pauseScreen.AddComponent<CanvasGroup>();
+            }
+
+            // Start hidden
+            pauseScreen.SetActive(false);
+            pauseCanvasGroup.interactable = false;
+            pauseCanvasGroup.blocksRaycasts = false;
+        }
+
+        // Lock cursor initially
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
+    void Update()
     {
-        // Check for ESC key to toggle pause
+        // Toggle pause on ESC
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePause();
+            if (!isPaused) PauseGame();
+            else ResumeGame();
         }
     }
 
-    public void TogglePause()
+    public void PauseGame()
     {
-        isPaused = !isPaused;
-
-        if (isPaused)
+        // Pause all assigned scripts except player movement
+        foreach (var script in scriptsToPause)
         {
-            PauseGame();
+            if (script != null && script.enabled && script != playerMovementScript)
+            {
+                script.enabled = false;
+            }
         }
-        else
+
+        // Show pause menu
+        pauseScreen.SetActive(true);
+        pauseCanvasGroup.interactable = true;
+        pauseCanvasGroup.blocksRaycasts = true;
+
+        // Unlock cursor
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        // Select default button
+        EventSystem.current.SetSelectedGameObject(null);
+        Button defaultButton = pauseScreen.GetComponentInChildren<Button>();
+        if (defaultButton != null)
         {
-            ResumeGame();
+            EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);
         }
+
+        isPaused = true;
     }
 
-    private void PauseGame()
+    public void ResumeGame()
     {
-        Time.timeScale = 0f;
-        if (pauseCanvas != null)
-            pauseCanvas.SetActive(true);
-        else
-            Debug.LogWarning("Pause Canvas is not assigned in GameManager!");
-        // Optional: mute audio, stop player input, etc.
+        // Re-enable all paused scripts
+        foreach (var script in scriptsToPause)
+        {
+            if (script != null && !script.enabled && script != playerMovementScript)
+            {
+                script.enabled = true;
+            }
+        }
+
+        // Hide pause menu
+        pauseCanvasGroup.interactable = false;
+        pauseCanvasGroup.blocksRaycasts = false;
+        pauseScreen.SetActive(false);
+
+        // Lock cursor
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        isPaused = false;
     }
 
-    private void ResumeGame()
+    public void SaveAndExit()
     {
-        Time.timeScale = 1f;
-        if (pauseCanvas != null)
-            pauseCanvas.SetActive(false);
-        // Optional: unmute audio, enable player input, etc.
-    }
-
-    // Optional: method to quit the game
-    public void QuitGame()
-    {
-        Debug.Log("Quitting game...");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }
