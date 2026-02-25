@@ -19,6 +19,7 @@ public class NpcInteraction : MonoBehaviour
     // reference to the "Press E" world-space canvas
     public GameObject interactionPromptObject;
     public GameObject namePlate;
+    public GameObject playerNamePlate;
 
     // Name of the conversation in the Dialogue Database
     public string conversationTitle = "Test Conversation";
@@ -90,7 +91,6 @@ public class NpcInteraction : MonoBehaviour
             isPlayerInsideInteractionRange = true;
             playerTransform = otherCollider.transform;
             namePlate.SetActive(false);
-            KarmaHud.SetActive(false);
 
 
             Debug.Log("NpcInteraction: Player entered interaction range.");
@@ -105,7 +105,6 @@ public class NpcInteraction : MonoBehaviour
             isPlayerInsideInteractionRange = false;
             playerTransform = null;
             namePlate.SetActive(true);
-            KarmaHud.SetActive(true);
 
             Debug.Log("NpcInteraction: Player left interaction range.");
             ShowInteractionPrompt(false);
@@ -130,6 +129,7 @@ public class NpcInteraction : MonoBehaviour
     {
         // Hide the "Press E" prompt while we are talking
         ShowInteractionPrompt(false);
+        playerNamePlate.SetActive(false);
 
         // Push personaKey + contextTag into DSU variables
         // This makes the active NPC persona data-driven

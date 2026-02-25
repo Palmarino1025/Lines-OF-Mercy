@@ -8,7 +8,7 @@ public class PCCameraController : MonoBehaviour
 
     private float currentYaw = 0f;
     private float currentPitch = 0f;
-    public bool isCameraLookEnabled = true;
+    public bool isCameraLookEnabled = false;
 
     void Start()
     {
@@ -17,19 +17,13 @@ public class PCCameraController : MonoBehaviour
         currentPitch = startAngles.x;
 
         // Start with camera look enabled (gameplay mode)
-        EnableCameraLook(true);
+        EnableCameraLook(false);
     }
 
     void Update()
     {
         // If dialogue is active we do not rotate the camera
         if (!isCameraLookEnabled)
-        {
-            return;
-        }
-
-        // Optional: only rotate while RMB is held
-        if (holdRightMouseToRotate && !Input.GetMouseButton(1))
         {
             return;
         }
