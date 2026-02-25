@@ -75,7 +75,6 @@
     <Compile Include="Assets\Main\Scripts\Core\KarmaEngine.cs" />
     <Compile Include="Assets\Main\Scripts\Dialogue\TypedInputReset.cs" />
     <Compile Include="Assets\Main\Scripts\Core\HUDMissionText.cs" />
-    <Compile Include="Assets\Main\Scripts\UI\PauseController.cs" />
     <Compile Include="Assets\Main\Scripts\UI\StaminaUI.cs" />
     <Compile Include="Assets\Main\Scripts\AI\HostedInferenceProvider.cs" />
     <Compile Include="Assets\SplashScreenFunctions.cs" />
@@ -89,7 +88,6 @@
     <Compile Include="Assets\NomadicRealms\TheAlleyway\Scripts\UnlockFrameRate.cs" />
     <Compile Include="Assets\NomadicRealms\TheAlleyway\Scripts\WindowConfiguration.cs" />
     <Compile Include="Assets\Main\Scripts\Core\Settings\SettingsMenuFunctions.cs" />
-    <Compile Include="Assets\Main\Scripts\UI\SplashScreenFunctions.cs" />
     <Compile Include="Assets\Main\Scripts\UI\MicIndicator.cs" />
     <Compile Include="Assets\Main\Scripts\AI\AITypedKarmaMapper.cs" />
     <Compile Include="Assets\Main\Scripts\UI\HUDVisibilityController.cs" />

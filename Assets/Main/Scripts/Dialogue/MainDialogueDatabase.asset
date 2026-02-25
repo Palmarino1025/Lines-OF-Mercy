@@ -610,9 +610,6 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
-      value: NextBranch
-      type: 0
-      typeString: CustomFieldType_Text
     - title: Initial Value
       value: '"Neutral"'
       type: 0
@@ -625,6 +622,8 @@ MonoBehaviour:
     fields:
     - title: Name
       value: S2_PlayerAgreedHelp
+      type: 0
+      typeString: 
   - id: 16
     fields:
     - title: Name
@@ -643,6 +642,8 @@ MonoBehaviour:
     fields:
     - title: Name
       value: S2_LucaThreatLevel
+      type: 0
+      typeString: 
   - id: 17
     fields:
     - title: Name
@@ -5571,8 +5572,6 @@ MonoBehaviour:
     entryGroups: []
     canvasScrollPosition: {x: 4.7673225, y: 1.1362772}
     canvasZoom: 0.8200002
-    canvasScrollPosition: {x: 251.76877, y: 217.71384}
-    canvasZoom: 0.7900002
   syncInfo:
     syncActors: 0
     syncItems: 0
