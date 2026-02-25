@@ -97,7 +97,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 6396e3f3c98748446861aa99c61de5c3,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2453,6 +2454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 0}
+  defaultName: Your character
 --- !u!114 &120129591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2466,6 +2468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 0}
+  defaultName: Your character
 --- !u!114 &120129592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18454,6 +18457,8 @@ MonoBehaviour:
     m_Bits: 0
   jumpHeight: 1.5
   jumpKey: 32
+  controller: {fileID: 0}
+  isMovementLocked: 0
   staminaUI: {fileID: 0}
   sprintReenableThreshold: 0.2
 --- !u!33 &858218837
@@ -31332,18 +31337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a815c6201691f43861ebf51db070da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData:
-    playerName: 
-    mobLoyalty: 0
-    policeLoyalty: 0
-    mercy: 0
-    ruthlessness: 0
-    textSpeed: 0
-    brightness: 0
-    npcRelationships:
-    - npcId: 
-      affinity: 0
-      trust: 0
+  missionDatabase: {fileID: 0}
+  currentMissionId: 
 --- !u!4 &1450818326
 Transform:
   m_ObjectHideFlags: 0
@@ -44742,7 +44737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c33537d74aade24498a694500ec6dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minConfidenceToApplyKarma: 0.55
 --- !u!114 &2105692184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44765,6 +44759,7 @@ MonoBehaviour:
   dsuNpcLineVar: AI_NPC_Line
   contextTag: Default
   personaKey: default
+  branch: 1
 --- !u!114 &2105692185
 MonoBehaviour:
   m_ObjectHideFlags: 0
