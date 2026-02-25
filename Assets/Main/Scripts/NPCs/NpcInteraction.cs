@@ -22,6 +22,7 @@ public class NpcInteraction : MonoBehaviour
 
     // Name of the conversation in the Dialogue Database
     public string conversationTitle = "Test Conversation";
+    public GameObject KarmaHud;
 
     // True only while the player is inside the interaction trigger
     public bool isPlayerInsideInteractionRange = false;
@@ -89,6 +90,8 @@ public class NpcInteraction : MonoBehaviour
             isPlayerInsideInteractionRange = true;
             playerTransform = otherCollider.transform;
             namePlate.SetActive(false);
+            KarmaHud.SetActive(false);
+
 
             Debug.Log("NpcInteraction: Player entered interaction range.");
             ShowInteractionPrompt(true);
@@ -102,6 +105,7 @@ public class NpcInteraction : MonoBehaviour
             isPlayerInsideInteractionRange = false;
             playerTransform = null;
             namePlate.SetActive(true);
+            KarmaHud.SetActive(true);
 
             Debug.Log("NpcInteraction: Player left interaction range.");
             ShowInteractionPrompt(false);

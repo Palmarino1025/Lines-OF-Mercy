@@ -82,7 +82,7 @@ public class KarmaEngine : MonoBehaviour
                       " | Alignment=" + GetAlignmentQuadrant());
         }
 
-        // Save updated values to DataManager
+        // Save updated values to GameManager
         WriteToPlayerData();
     }
 
@@ -157,12 +157,12 @@ public class KarmaEngine : MonoBehaviour
     /// </summary>
     public void WriteToPlayerData()
     {
-        DataManager.Instance.playerData.mobLoyalty = mobLoyalty;
-        DataManager.Instance.playerData.policeLoyalty = policeLoyalty;
-        DataManager.Instance.playerData.mercy = mercy;
-        DataManager.Instance.playerData.ruthlessness = ruthlessness;
+        GameManager.Instance.playerData.mobLoyalty = mobLoyalty;
+        GameManager.Instance.playerData.policeLoyalty = policeLoyalty;
+        GameManager.Instance.playerData.mercy = mercy;
+        GameManager.Instance.playerData.ruthlessness = ruthlessness;
 
-        DataManager.Instance.SavePlayerData();
+        GameManager.Instance.SavePlayerData();
     }
 
     /// <summary>
@@ -171,10 +171,10 @@ public class KarmaEngine : MonoBehaviour
     /// </summary>
     public void LoadFromPlayerData()
     {
-        mobLoyalty = DataManager.Instance.playerData.mobLoyalty;
-        policeLoyalty = DataManager.Instance.playerData.policeLoyalty;
-        mercy = DataManager.Instance.playerData.mercy;
-        ruthlessness = DataManager.Instance.playerData.ruthlessness;
+        mobLoyalty = GameManager.Instance.playerData.mobLoyalty;
+        policeLoyalty = GameManager.Instance.playerData.policeLoyalty;
+        mercy = GameManager.Instance.playerData.mercy;
+        ruthlessness = GameManager.Instance.playerData.ruthlessness;
 
         SynchronizeWithDialogueSystem();
     }
@@ -193,14 +193,14 @@ public class KarmaEngine : MonoBehaviour
         SynchronizeWithDialogueSystem();
 
         // Persist reset to save data
-        if (DataManager.Instance != null && DataManager.Instance.playerData != null)
+        if (GameManager.Instance != null && GameManager.Instance.playerData != null)
         {
-            DataManager.Instance.playerData.mobLoyalty = 0f;
-            DataManager.Instance.playerData.policeLoyalty = 0f;
-            DataManager.Instance.playerData.mercy = 0f;
-            DataManager.Instance.playerData.ruthlessness = 0f;
+            GameManager.Instance.playerData.mobLoyalty = 0f;
+            GameManager.Instance.playerData.policeLoyalty = 0f;
+            GameManager.Instance.playerData.mercy = 0f;
+            GameManager.Instance.playerData.ruthlessness = 0f;
 
-            DataManager.Instance.SavePlayerData();
+            GameManager.Instance.SavePlayerData();
         }
     }
 }

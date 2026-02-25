@@ -160,7 +160,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -202,6 +202,8 @@ MonoBehaviour:
     m_Bits: 1
   jumpHeight: 1.5
   jumpKey: 32
+  controller: {fileID: 0}
+  isMovementLocked: 0
   staminaUI: {fileID: 0}
   sprintReenableThreshold: 0.2
 --- !u!23 &974127232120933289
@@ -221,7 +223,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967292
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
@@ -256,7 +258,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6852505677243949778}
   - component: {fileID: 7556053559546904989}
-  - component: {fileID: 6373235795434507870}
   - component: {fileID: 7138131677001898853}
   - component: {fileID: 2148421980662728946}
   m_Layer: 0
@@ -332,14 +333,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6373235795434507870
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6577893974444048435}
-  m_Enabled: 1
 --- !u!114 &7138131677001898853
 MonoBehaviour:
   m_ObjectHideFlags: 0

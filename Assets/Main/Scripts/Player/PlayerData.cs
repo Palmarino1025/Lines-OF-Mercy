@@ -8,10 +8,17 @@ public class PlayerData
 
     // Karma
 
-    public float mobLoyalty;
-    public float policeLoyalty;
-    public float mercy;
-    public float ruthlessness;
+    public float mobLoyalty ;
+    public float policeLoyalty ;
+    public float mercy ;
+    public float ruthlessness ;
+    public float questProg ;
+    public string currentMissionText;
+
+    // Accessibility / UI
+
+    public float textSpeed;
+    public float brightness;
 
     // NPC Relationships
 

@@ -126,7 +126,6 @@ public class PlayerMovement : MonoBehaviour
             if (sprintKeyHeld)
                 currentSpeed *= sprintMultiplier;
         }
-        Vector3 positionBeforeMove = transform.position;
 
         if (!isMovementLocked)
             controller.Move(move * currentSpeed * Time.deltaTime);
@@ -138,11 +137,6 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(playerVelocity * Time.deltaTime);
 
-        if (Time.frameCount % 30 == 0)
-        {
-            Vector3 positionAfterMove = transform.position;
-            Debug.Log("POS before=" + positionBeforeMove + " after=" + positionAfterMove);
-        }
 
     }
 
@@ -155,6 +149,22 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity = Vector3.zero;
             IsSprinting = false;
             IsMoving = false;
+        }
+    }
+
+    public void TeleportTo(Vector3 position)
+    {
+        CharacterController controller = GetComponent<UnityEngine.CharacterController>();
+
+        if (controller != null)
+        {
+            controller.enabled = false;
+            transform.position = position;
+            controller.enabled = true;
+        }
+        else
+        {
+            transform.position = position;
         }
     }
 }
