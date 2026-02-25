@@ -8,23 +8,23 @@ public class HUDPlayerName : MonoBehaviour
 
     private void OnEnable()
     {
-        if (DataManager.Instance == null)
+        if (GameManager.Instance == null)
         {
-            Debug.LogWarning("DataManager not found.");
+            Debug.LogWarning("GameManager not found.");
             return;
         }
 
         // Subscribe to changes
-        DataManager.Instance.OnPlayerNameChanged += UpdatePlayerName;
+        GameManager.Instance.OnPlayerNameChanged += UpdatePlayerName;
 
         // Initial update (important if name already exists)
-        UpdatePlayerName(DataManager.Instance.GetPlayerName());
+        UpdatePlayerName(GameManager.Instance.GetPlayerName());
     }
 
     private void OnDisable()
     {
-        if (DataManager.Instance != null)
-            DataManager.Instance.OnPlayerNameChanged -= UpdatePlayerName;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnPlayerNameChanged -= UpdatePlayerName;
     }
 
     public void UpdatePlayerName(string name)

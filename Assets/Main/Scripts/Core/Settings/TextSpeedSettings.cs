@@ -39,9 +39,9 @@ public class TextSpeedSettings : MonoBehaviour
 
     private void LoadFromPlayerData()
     {
-        if (DataManager.Instance == null) return;
+        if (GameManager.Instance == null) return;
 
-        float savedSpeed = DataManager.Instance.playerData.textSpeed;
+        float savedSpeed = GameManager.Instance.playerData.textSpeed;
 
         if (textSpeedSlider != null)
         {
@@ -53,7 +53,7 @@ public class TextSpeedSettings : MonoBehaviour
 
     private void WriteToPlayerData(float value)
     {
-        DataManager.Instance.playerData.textSpeed = value;
-        DataManager.Instance.SavePlayerData();
+        GameManager.Instance.playerData.textSpeed = value;
+        GameManager.Instance.SavePlayerData();
     }
 }

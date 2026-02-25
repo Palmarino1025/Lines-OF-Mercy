@@ -21,7 +21,7 @@ public class DialogueTextSpeedApplier : MonoBehaviour
 
     public void ApplyTextSpeed(Transform actor)
     {
-        float speed = DataManager.Instance.GetTextSpeed();
+        float speed = GameManager.Instance.GetTextSpeed();
 
         UnityUITypewriterEffect typewriter = FindObjectOfType<UnityUITypewriterEffect>();
 

@@ -10,21 +10,21 @@ public class HUDMissionText : MonoBehaviour
     private void OnEnable()
     {
         // Safety check
-        if (DataManager.Instance == null)
+        if (GameManager.Instance == null)
             return;
 
         // Subscribe to mission updates
-        DataManager.Instance.OnMissionTextChanged += UpdateMissionText;
+        GameManager.Instance.OnMissionTextChanged += UpdateMissionText;
 
         // Immediately update with current mission
-        UpdateMissionText(DataManager.Instance.GetCurrentMissionText());
+        UpdateMissionText(GameManager.Instance.GetCurrentMissionText());
     }
 
     private void OnDisable()
     {
         // Unsubscribe to avoid memory leaks
-        if (DataManager.Instance != null)
-            DataManager.Instance.OnMissionTextChanged -= UpdateMissionText;
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnMissionTextChanged -= UpdateMissionText;
     }
 
     // Called whenever the mission changes

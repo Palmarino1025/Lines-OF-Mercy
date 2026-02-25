@@ -87,11 +87,9 @@
     <Compile Include="Assets\Main\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\NomadicRealms\TheAlleyway\Scripts\UnlockFrameRate.cs" />
     <Compile Include="Assets\NomadicRealms\TheAlleyway\Scripts\WindowConfiguration.cs" />
-    <Compile Include="Assets\Main\Scripts\Core\Settings\SettingsMenuFunctions.cs" />
     <Compile Include="Assets\Main\Scripts\UI\MicIndicator.cs" />
     <Compile Include="Assets\Main\Scripts\AI\AITypedKarmaMapper.cs" />
     <Compile Include="Assets\Main\Scripts\UI\HUDVisibilityController.cs" />
-    <Compile Include="Assets\Main\Scripts\Player\DataManager.cs" />
     <Compile Include="Assets\Main\Scripts\Dialogue\TypedResponseUI.cs" />
     <Compile Include="Assets\DialogueLuaBridge.cs" />
     <Compile Include="Assets\Main\Scripts\Core\Settings\BrightnessSettings.cs" />

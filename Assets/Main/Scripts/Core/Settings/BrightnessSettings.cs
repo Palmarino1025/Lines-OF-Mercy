@@ -40,9 +40,9 @@ public class BrightnessSettings : MonoBehaviour
     
     private void LoadFromPlayerData()
     {
-        if (DataManager.Instance == null) return;
+        if (GameManager.Instance == null) return;
 
-        float savedBrightness = DataManager.Instance.playerData.brightness;
+        float savedBrightness = GameManager.Instance.playerData.brightness;
 
         if (brightnessSlider != null)
         {
@@ -54,7 +54,7 @@ public class BrightnessSettings : MonoBehaviour
 
     private void WriteToPlayerData(float value)
     {
-        DataManager.Instance.playerData.brightness = value;
-        DataManager.Instance.SavePlayerData();
+        GameManager.Instance.playerData.brightness = value;
+        GameManager.Instance.SavePlayerData();
     }
 }

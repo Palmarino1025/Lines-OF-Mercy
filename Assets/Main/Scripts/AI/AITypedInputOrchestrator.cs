@@ -34,13 +34,13 @@ public class AITypedInputOrchestrator : MonoBehaviour
 
     private void Awake()
     {
-        if (DataManager.Instance != null)
+        if (GameManager.Instance != null)
         {
-            playerData = DataManager.Instance.playerData;
+            playerData = GameManager.Instance.playerData;
         }
         else
         {
-            Debug.LogWarning("[AITypedInputOrchestrator] DataManager instance not found. Karma updates will fail.");
+            Debug.LogWarning("[AITypedInputOrchestrator] GameManager instance not found. Karma updates will fail.");
         }
     }
 
@@ -64,9 +64,9 @@ public class AITypedInputOrchestrator : MonoBehaviour
     {
         if (playerData == null)
         {
-            if (DataManager.Instance != null && DataManager.Instance.playerData != null)
+            if (GameManager.Instance != null && GameManager.Instance.playerData != null)
             {
-                playerData = DataManager.Instance.playerData;
+                playerData = GameManager.Instance.playerData;
             }
             else
             {

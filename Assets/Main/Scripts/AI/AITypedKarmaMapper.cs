@@ -11,9 +11,9 @@ public class AITypedKarmaMapper : MonoBehaviour
     private void Awake()
     {
         // Get PlayerData reference once
-        if (DataManager.Instance != null && DataManager.Instance.playerData != null)
+        if (GameManager.Instance != null && GameManager.Instance.playerData != null)
         {
-            pd = DataManager.Instance.playerData;
+            pd = GameManager.Instance.playerData;
         }
         else
         {
@@ -28,8 +28,8 @@ public class AITypedKarmaMapper : MonoBehaviour
 
         if (pd == null)
         {
-            if (DataManager.Instance != null && DataManager.Instance.playerData != null)
-                pd = DataManager.Instance.playerData;
+            if (GameManager.Instance != null && GameManager.Instance.playerData != null)
+                pd = GameManager.Instance.playerData;
             else
             {
                 Debug.LogWarning("[AITypedKarmaMapper] No PlayerData found.");

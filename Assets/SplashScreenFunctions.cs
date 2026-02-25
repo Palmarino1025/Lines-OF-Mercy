@@ -48,7 +48,7 @@ public class SplashScreenFunctions : MonoBehaviour
             return;
 
         // Set the player's name as what they typed and save it
-        DataManager.Instance.SetPlayerName(playerName);
+        GameManager.Instance.SetPlayerName(playerName);
 
         // Reset Karma for new game
         if (KarmaEngine.Instance != null)
