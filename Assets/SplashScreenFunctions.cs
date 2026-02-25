@@ -21,6 +21,13 @@ public class SplashScreenFunctions : MonoBehaviour
     [Header("Player")]
     public GameObject player;
 
+    void Start()
+    {
+        // Show and unlock cursor for splash screen
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+    }
 
     // Hide the splash screen when pressed, show name-setting panel
     public void OnNewGamePressed()
@@ -40,29 +47,36 @@ public class SplashScreenFunctions : MonoBehaviour
         if (string.IsNullOrEmpty(playerName))
             return;
 
+        // Set the player's name as what they typed and save it
         DataManager.Instance.SetPlayerName(playerName);
 
+        // Reset Karma for new game
         if (KarmaEngine.Instance != null)
         {
             KarmaEngine.Instance.ResetKarma();
         }
 
+        // Update the HUD with entered name
+        HUDPlayerName hud = FindObjectOfType<HUDPlayerName>();
+        if (hud != null)
+            hud.UpdatePlayerName("New Player");
+
         player.GetComponent<PlayerMovement>().SetMovementLock(false);
 
+        // Hide the splash screen, activating the player and letting them into the game
         splashScreenCanvas.SetActive(false);
-        background.SetActive(false);
+        background.SetActive(true);
         hudCanvas.SetActive(true);
         nameEntryPanel.SetActive(false);
         player.SetActive(true);
     }
-
 
     // Continue with all previous save data
     public void OnLoadPressed()
     {
         player.GetComponent<PlayerMovement>().SetMovementLock(false);
         splashScreenCanvas.SetActive(false);
-        background.SetActive(false);
+        background.SetActive(true);
         hudCanvas.SetActive(true);
         player.SetActive(true);
     }
@@ -73,5 +87,14 @@ public class SplashScreenFunctions : MonoBehaviour
         splashScreenCanvas.SetActive(false);
         background.SetActive(false);
         settingsCanvas.SetActive(true);
+    }
+
+    public void Exit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

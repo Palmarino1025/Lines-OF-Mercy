@@ -151,4 +151,20 @@ public class PlayerMovement : MonoBehaviour
             IsMoving = false;
         }
     }
+
+    public void TeleportTo(Vector3 position)
+    {
+        CharacterController controller = GetComponent<UnityEngine.CharacterController>();
+
+        if (controller != null)
+        {
+            controller.enabled = false;
+            transform.position = position;
+            controller.enabled = true;
+        }
+        else
+        {
+            transform.position = position;
+        }
+    }
 }

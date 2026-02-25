@@ -15,6 +15,11 @@ public class PlayerData
     public float questProg ;
     public string currentMissionText;
 
+    // Accessibility / UI
+
+    public float textSpeed;
+    public float brightness;
+
     // NPC Relationships
 
     public List<NpcRelationshipData> npcRelationships = new();

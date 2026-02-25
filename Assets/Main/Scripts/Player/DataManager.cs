@@ -100,6 +100,29 @@ public class DataManager : MonoBehaviour
     // NPC RELATIONSHIPS
     // =========================
 
+    public void SetBrightness(float dimness)
+    {
+        playerData.brightness = dimness;
+        SavePlayerData();
+    }
+
+    public float GetBrightness()
+    {
+        return playerData.brightness;
+    }
+
+    public void SetTextSpeed(float speed)
+    {
+        playerData.textSpeed = speed;
+        SavePlayerData();
+    }
+
+    public float GetTextSpeed()
+    {
+        return playerData.textSpeed;
+    }
+
+    // NPC Relationships
     public NpcRelationshipData GetNpcRelationship(string npcId)
     {
         if (string.IsNullOrEmpty(npcId))
