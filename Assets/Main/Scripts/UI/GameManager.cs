@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 using System.IO;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,22 +27,26 @@ public class GameManager : MonoBehaviour
 
     public PlayerData playerData { get; private set; }
     public event Action<string> OnPlayerNameChanged;
+    public string nextSpawnPoint;
 
     private string savePath;
 
     // =========================================================
-    // UI / PAUSE
+    // UI 
     // =========================================================
 
     [Header("UI Panels")]
     public GameObject pauseScreen;
     public GameObject settingsCanvas;
 
+    [Header("Scene Transition")]
+    public CanvasGroup fadeCanvasGroup;
+    public float fadeDuration = 1f;
+
     private CanvasGroup pauseCanvasGroup;
 
     [Header("Gameplay Scripts")]
     public MonoBehaviour[] scriptsToPause;
-    public MonoBehaviour playerMovementScript;
 
     private bool isPaused = false;
 
@@ -230,11 +236,6 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        foreach (var script in scriptsToPause)
-        {
-            if (script != null && script.enabled && script != playerMovementScript)
-                script.enabled = false;
-        }
 
         pauseScreen.SetActive(true);
         pauseCanvasGroup.interactable = true;
@@ -253,11 +254,6 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        foreach (var script in scriptsToPause)
-        {
-            if (script != null && !script.enabled && script != playerMovementScript)
-                script.enabled = true;
-        }
 
         pauseCanvasGroup.interactable = false;
         pauseCanvasGroup.blocksRaycasts = false;
@@ -288,5 +284,86 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    // =======================================
+    // SCENE TRANSITION
+    // =======================================
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Re-enable camera rotation
+        PlayerMovement pm = FindObjectOfType<PlayerMovement>();
+        PCCameraController cam = pm.GetComponentInChildren<PCCameraController>();
+
+        if (cam != null)
+            cam.EnableCameraLook(true);
+
+        // Unlock player movement if it was locked
+        if (pm != null)
+            pm.SetMovementLock(false);
+
+        // Move player to spawn point if specified
+        if (!string.IsNullOrEmpty(nextSpawnPoint))
+        {
+            Transform sp = GameObject.Find(nextSpawnPoint)?.transform;
+            if (sp != null)
+                pm.TeleportTo(sp.position);
+
+            nextSpawnPoint = null; // reset
+        }
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        StartCoroutine(LoadSceneRoutine(sceneName));
+    }
+
+    private IEnumerator LoadSceneRoutine(string sceneName)
+    {
+        yield return StartCoroutine(Fade(1)); // Fade to black
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        operation.allowSceneActivation = false;
+
+        while (operation.progress < 0.9f)
+        {
+            yield return null;
+        }
+
+        operation.allowSceneActivation = true;
+
+        yield return StartCoroutine(Fade(0)); // Fade back in
+    }
+
+    private IEnumerator Fade(float targetAlpha)
+    {
+        float startAlpha = fadeCanvasGroup.alpha;
+        float time = 0f;
+
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            fadeCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / fadeDuration);
+            yield return null;
+        }
+
+        fadeCanvasGroup.alpha = targetAlpha;
+    }
+
+    public void LoadScene(string sceneName, string spawnPointName)
+    {
+        nextSpawnPoint = spawnPointName;
+        StartCoroutine(LoadSceneRoutine(sceneName));
     }
 }

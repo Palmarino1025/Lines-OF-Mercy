@@ -20,12 +20,19 @@ public class SplashScreenFunctions : MonoBehaviour
 
     [Header("Player")]
     public GameObject player;
+    PCCameraController camController;
 
     void Start()
     {
         // Show and unlock cursor for splash screen
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        // Freeze camera + show cursor
+        camController = player.GetComponentInChildren<PCCameraController>();
+        camController.EnableCameraLook(false);
+
+        player.GetComponent<PlayerMovement>().SetMovementLock(true);
 
     }
 
@@ -69,12 +76,21 @@ public class SplashScreenFunctions : MonoBehaviour
         hudCanvas.SetActive(true);
         nameEntryPanel.SetActive(false);
         player.SetActive(true);
+
+        // Unlock camera + hide cursor
+        camController.EnableCameraLook(true);
+
+        player.GetComponent<PlayerMovement>().SetMovementLock(false);
     }
 
     // Continue with all previous save data
     public void OnLoadPressed()
     {
+        // Unlock camera + hide cursor
+        camController.EnableCameraLook(true);
+
         player.GetComponent<PlayerMovement>().SetMovementLock(false);
+
         splashScreenCanvas.SetActive(false);
         background.SetActive(true);
         hudCanvas.SetActive(true);
