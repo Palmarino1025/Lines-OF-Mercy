@@ -624,6 +624,14 @@ MonoBehaviour:
       value: S2_PlayerAgreedHelp
       type: 0
       typeString: 
+    - title: Initial Value
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
   - id: 16
     fields:
     - title: Name
@@ -642,6 +650,14 @@ MonoBehaviour:
     fields:
     - title: Name
       value: S2_LucaThreatLevel
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Description
+      value: 
       type: 0
       typeString: 
   - id: 17
