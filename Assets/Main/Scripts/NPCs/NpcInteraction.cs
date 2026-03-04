@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using PixelCrushers.DialogueSystem;  // connect to Dialogue System
 using UnityEngine.EventSystems;      // Used to detect if player is typing in UI (InputField focus)
 using UnityEngine.UI;   // For InputField
@@ -23,12 +23,15 @@ public class NpcInteraction : MonoBehaviour
 
     // Name of the conversation in the Dialogue Database
     public string conversationTitle = "Test Conversation";
-    public GameObject KarmaHud;
+    public GameObject displayHud;
+    public GameObject displayKarma;
 
     // True only while the player is inside the interaction trigger
     public bool isPlayerInsideInteractionRange = false;
 
-    // keep a reference to the player who entered the trigger
+    [Header("Player Control References")]
+    private PlayerMovement playerMovementScript;
+    private PCCameraController playerCameraScript;
     private Transform playerTransform;
 
     // Data-driven Personas
@@ -49,8 +52,16 @@ public class NpcInteraction : MonoBehaviour
 
     private void Start()
     {
-        // ensure the prompt is hidden at start of game
-        if (interactionPromptObject != null)
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            playerMovementScript = player.GetComponent<PlayerMovement>();
+            playerCameraScript = player.GetComponentInChildren<PCCameraController>();
+        }
+
+            // ensure the prompt is hidden at start of game
+            if (interactionPromptObject != null)
         {
             interactionPromptObject.SetActive(false);
             namePlate.SetActive(true);
@@ -130,6 +141,8 @@ public class NpcInteraction : MonoBehaviour
         // Hide the "Press E" prompt while we are talking
         ShowInteractionPrompt(false);
         playerNamePlate.SetActive(false);
+        displayHud.SetActive(false);
+        displayKarma.SetActive(false);
 
         // Push personaKey + contextTag into DSU variables
         // This makes the active NPC persona data-driven
@@ -175,17 +188,61 @@ public class NpcInteraction : MonoBehaviour
         }
     }
 
-    //private void OnEnable()
-    //{
-    //    if (DialogueManager.instance != null)
-    //    {
-    //        DialogueManager.instance.conversationEnded += OnConversationEnded;
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("DialogueManager.instance is null in OnEnable");
-    //    }
-    //}
+    private void OnEnable()
+    {
+        if (DialogueManager.instance != null)
+        {
+            DialogueManager.instance.conversationStarted += OnConversationStarted;
+            DialogueManager.instance.conversationEnded += OnConversationEnded;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (DialogueManager.instance != null)
+        {
+            DialogueManager.instance.conversationStarted -= OnConversationStarted;
+            DialogueManager.instance.conversationEnded -= OnConversationEnded;
+        }
+    }
+
+    private void OnConversationStarted(Transform actor)
+    {
+        Debug.Log("Dialogue Started → Locking player controls");
+
+        // Disable movement
+        if (playerMovementScript != null)
+            playerMovementScript.enabled = false;
+
+        // Disable camera
+        if (playerCameraScript != null)
+            playerCameraScript.EnableCameraLook(false);
+
+        // Unlock + show cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void OnConversationEnded(Transform actor)
+    {
+        Debug.Log("Dialogue Ended → Restoring player controls");
+
+        // Re-enable movement
+        if (playerMovementScript != null)
+            playerMovementScript.enabled = true;
+
+        // Re-enable camera
+        if (playerCameraScript != null)
+            playerCameraScript.EnableCameraLook(true);
+
+        // Lock + hide cursor again
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        playerNamePlate.SetActive(true);
+        displayHud.SetActive(true);
+        displayKarma.SetActive(true);
+    }
 
     // Safely detect whether DSU dialogue is currently active WITHOUT hardcoding
     // a specific property name (prevents compile issues across DSU versions).

@@ -231,7 +231,6 @@ GameObject:
   m_Component:
   - component: {fileID: 22496680}
   - component: {fileID: 11424526}
-  - component: {fileID: 3402854667325619629}
   m_Layer: 5
   m_Name: Basic Standard Dialogue UI
   m_TagString: Untagged
@@ -277,7 +276,6 @@ MonoBehaviour:
     panel: {fileID: 11457502}
     alertText:
       m_uiText: {fileID: 11411984}
-      m_textMeshProUGUI: {fileID: 0}
     queueAlerts: 1
     dontQueueDuplicates: 0
     waitForHideAnimation: 1
@@ -304,18 +302,6 @@ MonoBehaviour:
     - {fileID: 191022}
   addEventSystemIfNeeded: 1
   verifyPanelAssignments: 1
---- !u!114 &3402854667325619629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de2a43f469b733441a6a632fd82481e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &105778
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,10 +792,8 @@ MonoBehaviour:
   portraitImage: {fileID: 11422712}
   portraitName:
     m_uiText: {fileID: 11456524}
-    m_textMeshProUGUI: {fileID: 0}
   subtitleText:
     m_uiText: {fileID: 11445008}
-    m_textMeshProUGUI: {fileID: 0}
   addSpeakerName: 0
   addSpeakerNameFormat: '{0}: {1}'
   accumulateText: 0
@@ -1412,7 +1396,7 @@ MonoBehaviour:
   onBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3402854667325619629}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DialogueTextSpeedApplier, Assembly-CSharp
         m_MethodName: ApplyTextSpeed
         m_Mode: 2
@@ -1891,10 +1875,8 @@ MonoBehaviour:
   portraitImage: {fileID: 11405928}
   portraitName:
     m_uiText: {fileID: 11473894}
-    m_textMeshProUGUI: {fileID: 0}
   subtitleText:
     m_uiText: {fileID: 11489786}
-    m_textMeshProUGUI: {fileID: 0}
   addSpeakerName: 0
   addSpeakerNameFormat: '{0}: {1}'
   accumulateText: 0
@@ -3198,7 +3180,6 @@ MonoBehaviour:
   button: {fileID: 11438236}
   label:
     m_uiText: {fileID: 11499256}
-    m_textMeshProUGUI: {fileID: 0}
   setLabelColor: 1
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &3994075428067327857
@@ -3442,10 +3423,8 @@ MonoBehaviour:
   panel: {fileID: 11461418}
   label:
     m_uiText: {fileID: 11435794}
-    m_textMeshProUGUI: {fileID: 0}
   inputField:
     m_uiInputField: {fileID: 11483786}
-    m_textMeshProInputField: {fileID: 0}
   acceptKey: 13
   acceptButton: 
   cancelKey: 27
@@ -4493,7 +4472,6 @@ MonoBehaviour:
   pcImage: {fileID: 0}
   pcName:
     m_uiText: {fileID: 0}
-    m_textMeshProUGUI: {fileID: 0}
   usePortraitNativeSize: 0
   timerSlider: {fileID: 11484772}
   buttonAlignment: 0
@@ -4973,7 +4951,7 @@ MonoBehaviour:
   onBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3402854667325619629}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DialogueTextSpeedApplier, Assembly-CSharp
         m_MethodName: ApplyTextSpeed
         m_Mode: 2

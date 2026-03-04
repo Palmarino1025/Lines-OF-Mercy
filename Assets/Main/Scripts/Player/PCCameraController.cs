@@ -44,7 +44,7 @@ public class PCCameraController : MonoBehaviour
     {
         isCameraLookEnabled = enableLook;
 
-        if (enableLook)
+        if (!enableLook)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

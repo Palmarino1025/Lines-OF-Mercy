@@ -46,11 +46,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool sprintBlocked = false;
 
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     void Start()
     {
         controller = GetComponent<CharacterController>();
