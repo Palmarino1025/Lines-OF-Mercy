@@ -6,15 +6,19 @@ public class PCCameraController : MonoBehaviour
     public float mouseSensitivity = 2f;
     public bool holdRightMouseToRotate = false;
 
+    //Reference to the player root object so left/right rotation happens on the player, not just the camera
+    public Transform playerTransform;
+
     private float currentYaw = 0f;
     private float currentPitch = 0f;
     public bool isCameraLookEnabled = false;
 
     void Start()
     {
-        Vector3 startAngles = transform.eulerAngles;
+        //Use the player rotation for yaw if a player transform was assigned
+        Vector3 startAngles = playerTransform != null ? playerTransform.eulerAngles : transform.eulerAngles;
         currentYaw = startAngles.y;
-        currentPitch = startAngles.x;
+        currentPitch = transform.eulerAngles.x;
 
         // Start with camera look enabled (gameplay mode)
         EnableCameraLook(false);
@@ -36,7 +40,15 @@ public class PCCameraController : MonoBehaviour
 
         currentPitch = Mathf.Clamp(currentPitch, -80f, 80f);
 
-        transform.rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
+        //Rotate the player left/right on the Y axis
+        if (playerTransform != null)
+        {
+            //Apply horizontal turning to the player object
+            playerTransform.rotation = Quaternion.Euler(0f, currentYaw, 0f);
+        }
+
+        //Rotate only the camera up/down on the X axis
+        transform.localRotation = Quaternion.Euler(currentPitch, 0f, 0f);
     }
 
     // This will be called when a dialogue opens/closes
