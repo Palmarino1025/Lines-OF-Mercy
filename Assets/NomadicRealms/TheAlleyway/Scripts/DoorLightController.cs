@@ -11,7 +11,7 @@ public class DoorLightController : MonoBehaviour
     [Range(0.0f, 10.0f)]
     public float FlickerFrequency;
     public float FlickerIntensity;
-    public Light light;
+    public Light lights;
     public GameObject LOD0;
     public GameObject LOD1;
     public GameObject LOD2;
@@ -22,13 +22,13 @@ public class DoorLightController : MonoBehaviour
     public Material LOD2_MaterialOn;
     public Material LOD2_MaterialOff;
     float myRandomNumber;
-    float timer;
-    float currentIntensity;
+    //float timer;
+    //float currentIntensity;
 
     void Start()
     {
-        timer = 10f;
-        currentIntensity = 10.0f;
+        //timer = 10f;
+       // currentIntensity = 10.0f;
         FlickerIntensity = 0.0f;
     }
 
@@ -54,31 +54,31 @@ public class DoorLightController : MonoBehaviour
         LOD0.GetComponent<Renderer>().material = LOD0_MaterialOn;
         LOD1.GetComponent<Renderer>().material = LOD1_MaterialOn;
         LOD2.GetComponent<Renderer>().material = LOD2_MaterialOn;
-        light.enabled = true;
-        light.intensity = 10.0f;
+        lights.enabled = true;
+        lights.intensity = 10.0f;
     }
     void TurnOff()
     {
         LOD0.GetComponent<Renderer>().material = LOD0_MaterialOff;
         LOD1.GetComponent<Renderer>().material = LOD1_MaterialOff;
         LOD2.GetComponent<Renderer>().material = LOD2_MaterialOff;
-        light.enabled = false;
-        light.intensity = 10.0f;
+        lights.enabled = false;
+        lights.intensity = 10.0f;
     }
     void Flicker()
     {
-        light.enabled = true;
+        lights.enabled = true;
         myRandomNumber = Random.Range(0f, 10f);
         if (myRandomNumber < FlickerFrequency)
         {
-            light.intensity = FlickerIntensity;
+            lights.intensity = FlickerIntensity;
             LOD0.GetComponent<Renderer>().material = LOD0_MaterialOff;
             LOD1.GetComponent<Renderer>().material = LOD1_MaterialOff;
             LOD2.GetComponent<Renderer>().material = LOD2_MaterialOff;
         }
         else
         {
-            light.intensity = 10.0f;
+            lights.intensity = 10.0f;
             LOD0.GetComponent<Renderer>().material = LOD0_MaterialOn;
             LOD1.GetComponent<Renderer>().material = LOD1_MaterialOn;
             LOD2.GetComponent<Renderer>().material = LOD2_MaterialOn;

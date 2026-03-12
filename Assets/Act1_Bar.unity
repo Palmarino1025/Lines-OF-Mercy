@@ -5010,6 +5010,12 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 250846611}
+    - target: {fileID: 4048858543338426750, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0d4757a6c01cec74c857f83131c227ce,
+        type: 3}
     - target: {fileID: 5357131649303907437, guid: fb621a33cc289ae4f96a6a618a534d6b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -5079,6 +5085,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7091344469257907245, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7091344469257907245, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7244429555704576956, guid: fb621a33cc289ae4f96a6a618a534d6b,
         type: 3}

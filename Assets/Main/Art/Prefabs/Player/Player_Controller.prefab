@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 8529547683477067198}
   - component: {fileID: 6834555515390318515}
   - component: {fileID: 3604197107058706487}
+  - component: {fileID: 8988783171967293687}
   m_Layer: 0
   m_Name: MiniMapCamera
   m_TagString: Untagged
@@ -386,6 +387,20 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &8988783171967293687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027151611968284784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d498ef901ed4146bb86f7bb69adfc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 8959051597082792035}
+  minimapHeight: 30
 --- !u!1 &6577893974444048435
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 2
   holdRightMouseToRotate: 0
+  playerTransform: {fileID: 8959051597082792035}
   isCameraLookEnabled: 1
 --- !u!114 &2148421980662728946
 MonoBehaviour:
