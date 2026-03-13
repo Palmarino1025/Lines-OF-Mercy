@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public PlayerData playerData { get; private set; }
     public event Action<string> OnPlayerNameChanged;
     public string nextSpawnPoint;
+    public PlayerMovement playerMovement;
+    public PCCameraController pcCameraController;
 
     private string savePath;
 
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration = 1f;
 
-    private CanvasGroup pauseCanvasGroup;
+    public CanvasGroup pauseCanvasGroup;
 
     [Header("Gameplay Scripts")]
     public MonoBehaviour[] scriptsToPause;
@@ -241,6 +243,10 @@ public class GameManager : MonoBehaviour
         pauseCanvasGroup.interactable = true;
         pauseCanvasGroup.blocksRaycasts = true;
 
+        isPaused = true;
+
+        PlayerMove(isPaused);
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -248,21 +254,29 @@ public class GameManager : MonoBehaviour
         Button defaultButton = pauseScreen.GetComponentInChildren<Button>();
         if (defaultButton != null)
             EventSystem.current.SetSelectedGameObject(defaultButton.gameObject);
-
-        isPaused = true;
     }
 
     public void ResumeGame()
     {
+        if (!isPaused) return;
 
-        pauseCanvasGroup.interactable = false;
-        pauseCanvasGroup.blocksRaycasts = false;
         pauseScreen.SetActive(false);
+
+        isPaused = false;
+
+        PlayerMove(isPaused);
+
+        EventSystem.current.SetSelectedGameObject(null);
+
+        StartCoroutine(LockCursorNextFrame());
+    }
+
+    IEnumerator LockCursorNextFrame()
+    {
+        yield return null;
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-        isPaused = false;
     }
 
     public void OpenSettings()
@@ -273,6 +287,15 @@ public class GameManager : MonoBehaviour
     public void CloseSettings()
     {
         settingsCanvas.SetActive(false);
+    }
+
+    public void PlayerMove(bool paused)
+    {
+        if (playerMovement != null)
+            playerMovement.SetMovementLock(paused);
+
+        if (pcCameraController != null)
+            pcCameraController.EnableCameraLook(!paused);
     }
 
     public void SaveAndExit()

@@ -1725,6 +1725,18 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &1152653619 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8761683523402113886, guid: fb621a33cc289ae4f96a6a618a534d6b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1948440356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d616abca59f32d45bebc8324697ea91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1223554089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5277,6 +5289,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1682664534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8998834633702440904, guid: fb621a33cc289ae4f96a6a618a534d6b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1948440356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1716431638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5683,11 +5701,56 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8711795125918230442, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711795125918230442, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1152653619}
+    - target: {fileID: 8711795125918230442, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711795125918230442, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711795125918230442, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711795125918230442, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761683523402113886, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: pauseScreen
+      value: 
+      objectReference: {fileID: 1682664534}
     - target: {fileID: 8761683523402113886, guid: fb621a33cc289ae4f96a6a618a534d6b,
         type: 3}
       propertyPath: nextSpawnPoint
       value: SPFromAlley
       objectReference: {fileID: 0}
+    - target: {fileID: 8761683523402113886, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 1825627548}
+    - target: {fileID: 8761683523402113886, guid: fb621a33cc289ae4f96a6a618a534d6b,
+        type: 3}
+      propertyPath: pcCameraController
+      value: 
+      objectReference: {fileID: 185274748}
     - target: {fileID: 9153363863307079630, guid: fb621a33cc289ae4f96a6a618a534d6b,
         type: 3}
       propertyPath: displaySettings.subtitleSettings.continueButton
