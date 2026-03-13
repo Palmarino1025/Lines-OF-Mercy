@@ -81,6 +81,9 @@ public class SplashScreenFunctions : MonoBehaviour
         camController.EnableCameraLook(true);
 
         player.GetComponent<PlayerMovement>().SetMovementLock(false);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Continue with all previous save data

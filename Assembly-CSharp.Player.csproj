@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="Assets\Main\Scripts\Core\MissionDatabase.cs" />
     <Compile Include="Assets\NomadicRealms\TheAlleyway\Scripts\DoorLightController.cs" />
-    <Compile Include="Assets\Main\Scripts\UI\PauseMenuManager.cs" />
     <Compile Include="Assets\Main\Scripts\Core\GameSystemsRoot.cs" />
     <Compile Include="Assets\NightClub\Scripts\RotatingDiscoLight.cs" />
     <Compile Include="Assets\Main\Scripts\Core\SceneDoor.cs" />

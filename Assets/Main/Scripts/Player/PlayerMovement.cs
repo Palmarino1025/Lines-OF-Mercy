@@ -57,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
         if (staminaUI == null)
             staminaUI = FindObjectOfType<StaminaUI>();
 
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     void Update()
