@@ -11,7 +11,7 @@ public class PCCameraController : MonoBehaviour
 
     private float currentYaw = 0f;
     private float currentPitch = 0f;
-    public bool isCameraLookEnabled = false;
+    public bool isCameraLookEnabled = true;
 
     void Start()
     {
@@ -21,7 +21,6 @@ public class PCCameraController : MonoBehaviour
         currentPitch = transform.eulerAngles.x;
 
         // Start with camera look enabled (gameplay mode)
-        EnableCameraLook(false);
     }
 
     void Update()
