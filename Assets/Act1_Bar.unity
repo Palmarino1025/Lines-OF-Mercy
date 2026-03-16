@@ -348,6 +348,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5913154204893215028, guid: 6770493bf2119334aa15362c5f8f6a14,
+        type: 3}
+      propertyPath: staminaUI
+      value: 
+      objectReference: {fileID: 1948440357}
     - target: {fileID: 6852505677243949778, guid: 6770493bf2119334aa15362c5f8f6a14,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -5827,6 +5832,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 505316305}
   m_SourcePrefab: {fileID: 100100000, guid: fb621a33cc289ae4f96a6a618a534d6b, type: 3}
+--- !u!114 &1948440357 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7164840417155275629, guid: fb621a33cc289ae4f96a6a618a534d6b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1948440356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93781d07073465418fcc004b60b2b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1951137748
 MonoBehaviour:
   m_ObjectHideFlags: 0
