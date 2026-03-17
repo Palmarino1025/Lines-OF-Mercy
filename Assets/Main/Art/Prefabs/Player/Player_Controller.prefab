@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  sprintMultiplier: 1.7
+  sprintMultiplier: 1.5
   sprintKey: 304
   cameraTransform: {fileID: 6852505677243949778}
   gravity: -9.81
@@ -206,7 +206,7 @@ MonoBehaviour:
   controller: {fileID: 1932996695748275825}
   isMovementLocked: 0
   staminaUI: {fileID: 0}
-  sprintReenableThreshold: 0.2
+  sprintReenableThreshold: 0.3
 --- !u!23 &974127232120933289
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Tooltip("If stamina hits 0, sprint is blocked until stamina recovers to this % (0-1). Example: 0.2 = 20%")]
     [Range(0f, 1f)]
-    public float sprintReenableThreshold = 0.2f;
+    public float sprintReenableThreshold = 0.3f;
 
     private bool sprintBlocked = false;
 

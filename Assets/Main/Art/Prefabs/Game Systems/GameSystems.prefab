@@ -3238,11 +3238,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 34c69e9a19a994b4c96aad3920938c3a, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -5695,10 +5695,13 @@ MonoBehaviour:
   missionDatabase: {fileID: 11400000, guid: a1238f4c8df05734eba18fdd5cb2cfcd, type: 2}
   currentMissionId: 
   nextSpawnPoint: 
+  playerMovement: {fileID: 0}
+  pcCameraController: {fileID: 0}
   pauseScreen: {fileID: 8998834633702440904}
   settingsCanvas: {fileID: 750320647436427863}
   fadeCanvasGroup: {fileID: 1613853173788084435}
   fadeDuration: 1
+  pauseCanvasGroup: {fileID: 0}
   scriptsToPause: []
 --- !u!1 &5583312274226453699
 GameObject:
@@ -5918,6 +5921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4129630354590466988}
+  - component: {fileID: 7164840417155275629}
   m_Layer: 5
   m_Name: StaminaBar
   m_TagString: Untagged
@@ -5947,6 +5951,28 @@ RectTransform:
   m_AnchoredPosition: {x: 110, y: 252}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7164840417155275629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5931728547336471023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93781d07073465418fcc004b60b2b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaFill: {fileID: 5798295441916143219}
+  normalStaminaColor: {r: 0.8, g: 0.72, b: 0.5, a: 1}
+  lowStaminaColor: {r: 0.85, g: 0.2, b: 0.2, a: 1}
+  maxStamina: 100
+  currentStamina: 0
+  drainRate: 18
+  regenRate: 24
+  regenDelayAfterSprint: 1.1
+  uiFillSmoothSpeed: 8
+  lowStaminaThreshold: 0.25
 --- !u!1 &5956170860742546138
 GameObject:
   m_ObjectHideFlags: 0
